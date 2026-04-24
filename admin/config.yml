@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: AlanSamaSM/thewatermakerstore        # TODO: replace USER with your GitHub username
+  repo: AlanSamaSM/thewatermakerstore
   branch: main
-  base_url: https://decap-oauth.alansamasm.workers.dev   # TODO: replace with the actual OAuth proxy URL once deployed (Phase 3)
+  base_url: https://decap-oauth.alansama2906.workers.dev
   auth_endpoint: /auth
 
 media_folder: uploads
@@ -10,8 +10,8 @@ public_folder: /uploads
 
 publish_mode: simple
 
-site_url: https://thewatermakerstore.pages.dev
-display_url: https://thewatermakerstore.pages.dev
+site_url: https://thewatermakerstore.alansama2906.workers.dev
+display_url: https://thewatermakerstore.alansama2906.workers.dev
 logo_url: /uploads/logo.webp
 
 locale: es

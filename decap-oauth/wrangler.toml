@@ -1,0 +1,8 @@
+name = "decap-oauth"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# Secrets (set via `npx wrangler secret put CLIENT_ID / CLIENT_SECRET`):
+#   CLIENT_ID      — GitHub OAuth App Client ID
+#   CLIENT_SECRET  — GitHub OAuth App Client Secret
