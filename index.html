@@ -302,8 +302,9 @@ const SERVICES = [
 { icon: 'factory', title: 'Industrial', desc: 'Plantas de ósmosis inversa de alto volumen para hoteles y empresas.' }];
 
 
+// Fallback posts used on first paint and if /content/posts.json fails to load.
+// Real posts live in content/posts.json and are edited via the Decap CMS at /admin/.
 const BLOG_POSTS = [
-/* TODO: reemplazar con posts reales */
 { img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80', alt: 'Velero en marina de La Paz', tag: 'Mantenimiento', date: '12 abr 2025', title: '¿Cada cuánto debes cambiar las membranas de tu watermaker?' },
 { img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', alt: 'Sistema de ósmosis inversa', tag: 'Guía técnica', date: '28 mar 2025', title: 'Los 5 síntomas que indican que tu desalador necesita servicio urgente' },
 { img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80', alt: 'Yate en el Mar de Cortés', tag: 'Temporada', date: '10 mar 2025', title: 'Prepara tu watermaker para la temporada de cruceros en La Paz' }];
@@ -347,6 +348,19 @@ function useScrolled(threshold = 10) {
     return () => window.removeEventListener('scroll', fn);
   }, [threshold]);
   return scrolled;
+}
+
+function useBlogPosts() {
+  const [posts, setPosts] = useState(BLOG_POSTS);
+  useEffect(() => {
+    fetch('/content/posts.json', { cache: 'no-cache' })
+      .then(r => r.ok ? r.json() : null)
+      .then(d => {
+        if (d && Array.isArray(d.posts) && d.posts.length) setPosts(d.posts);
+      })
+      .catch(() => { /* keep BLOG_POSTS fallback */ });
+  }, []);
+  return posts;
 }
 
 /* ─── NAV ───────────────────────────────────────────── */
@@ -719,6 +733,7 @@ function App() {
   }
 
   const ac = tweaks.accentColor;
+  const posts = useBlogPosts();
 
   return (
     <div style={{ background: '#FAFAF9', minHeight: '100vh' }}>
@@ -955,8 +970,7 @@ function App() {
             <p style={{ fontSize: 14, color: '#6B7280', marginBottom: 28, marginTop: 0 }}>
               Consejos técnicos de Eduardo y el equipo de The Watermaker Store.
             </p>
-            {/* TODO: reemplazar con posts reales del blog */}
-            <BlogCarousel posts={BLOG_POSTS} ac={ac} />
+            <BlogCarousel posts={posts} ac={ac} />
           </div>
         </section>
       }
