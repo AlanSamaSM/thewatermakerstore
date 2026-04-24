@@ -1,0 +1,44 @@
+backend:
+  name: github
+  repo: AlanSamaSM/thewatermakerstore        # TODO: replace USER with your GitHub username
+  branch: main
+  base_url: https://decap-oauth.alansamasm.workers.dev   # TODO: replace with the actual OAuth proxy URL once deployed (Phase 3)
+  auth_endpoint: /auth
+
+media_folder: uploads
+public_folder: /uploads
+
+publish_mode: simple
+
+site_url: https://thewatermakerstore.pages.dev
+display_url: https://thewatermakerstore.pages.dev
+logo_url: /uploads/logo.webp
+
+locale: es
+
+collections:
+  - name: posts
+    label: Blog
+    label_singular: Post
+    description: Artículos del blog. Se guardan en content/posts.json.
+    files:
+      - name: all
+        label: Todos los posts
+        file: content/posts.json
+        fields:
+          - label: Posts
+            name: posts
+            widget: list
+            summary: "{{fields.title}}  —  {{fields.date}}"
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Slug, name: slug, widget: string, hint: "Identificador en URL (sin espacios, minúsculas)" }
+              - { label: Fecha, name: date, widget: datetime, format: "DD MMM YYYY", date_format: "DD MMM YYYY", time_format: false }
+              - label: Categoría
+                name: tag
+                widget: select
+                options: [Mantenimiento, Guía técnica, Temporada, Instalación]
+              - { label: Imagen, name: img, widget: image }
+              - { label: Texto alternativo (alt), name: alt, widget: string }
+              - { label: Extracto, name: excerpt, widget: text, required: false }
+              - { label: Cuerpo (markdown), name: body, widget: markdown, required: false }

@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "title": "¿Cada cuánto debes cambiar las membranas de tu watermaker?",
+      "slug": "cada-cuanto-cambiar-membranas",
+      "date": "12 abr 2025",
+      "tag": "Mantenimiento",
+      "img": "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80",
+      "alt": "Velero en marina de La Paz",
+      "excerpt": "",
+      "body": ""
+    },
+    {
+      "title": "Los 5 síntomas que indican que tu desalador necesita servicio urgente",
+      "slug": "5-sintomas-servicio-urgente",
+      "date": "28 mar 2025",
+      "tag": "Guía técnica",
+      "img": "https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80",
+      "alt": "Sistema de ósmosis inversa",
+      "excerpt": "",
+      "body": ""
+    },
+    {
+      "title": "Prepara tu watermaker para la temporada de cruceros en La Paz",
+      "slug": "temporada-cruceros-la-paz",
+      "date": "10 mar 2025",
+      "tag": "Temporada",
+      "img": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+      "alt": "Yate en el Mar de Cortés",
+      "excerpt": "",
+      "body": ""
+    }
+  ]
+}

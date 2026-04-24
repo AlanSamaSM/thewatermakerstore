@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Watermaker Store — Desaladores en La Paz, B.C.S. | Servicio y Refacciones</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Servicio, instalación y refacciones de desaladores (watermakers) en La Paz, Baja California Sur. Centro autorizado de Spectra, Sea Recovery, Katadyn, Pentair y más. Servicio marino, residencial e industrial." />
+  <meta name="keywords" content="watermaker La Paz, desalador BCS, ósmosis inversa marina, Spectra watermaker México, servicio watermaker, refacciones desalador" />
+  <meta name="author" content="The Watermaker Store" />
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="MX-BCS" />
+  <meta name="geo.placename" content="La Paz" />
+  <meta name="geo.position" content="24.1426;-110.3128" />
+  <link rel="canonical" href="https://www.thewatermakerstore.com.mx/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Watermaker Store" />
+  <meta property="og:title" content="The Watermaker Store — Desaladores en La Paz, B.C.S." />
+  <meta property="og:description" content="Servicio, instalación y refacciones de desaladores en Baja California Sur. Trust in every drop." />
+  <meta property="og:url" content="https://www.thewatermakerstore.com.mx/" />
+  <meta property="og:image" content="https://www.thewatermakerstore.com.mx/uploads/hero-marina.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_MX" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Watermaker Store — Desaladores en La Paz" />
+  <meta name="twitter:description" content="Servicio, instalación y refacciones de desaladores en Baja California Sur." />
+  <meta name="twitter:image" content="https://www.thewatermakerstore.com.mx/uploads/hero-marina.webp" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="uploads/logo.webp" />
+  <link rel="apple-touch-icon" href="uploads/logo.webp" />
+  <meta name="theme-color" content="#0A4A6E" />
+
+  <!-- Structured Data - LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "The Watermaker Store",
+    "image": "https://www.thewatermakerstore.com.mx/uploads/logo.webp",
+    "description": "Servicio, instalación y refacciones de desaladores en La Paz, Baja California Sur.",
+    "@id": "https://www.thewatermakerstore.com.mx/",
+    "url": "https://www.thewatermakerstore.com.mx/",
+    "telephone": "+52-612-140-0253",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Mariano Abasolo #2865, col. 5 de Febrero",
+      "addressLocality": "La Paz",
+      "addressRegion": "BCS",
+      "postalCode": "23060",
+      "addressCountry": "MX"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 24.1426,
+      "longitude": -110.3128
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }],
+    "sameAs": [
+      "https://www.facebook.com/TheWaterMakerStore",
+      "https://instagram.com/the_watermaker_guys"
+    ],
+    "areaServed": {
+      "@type": "State",
+      "name": "Baja California Sur"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+          colors: {
+            navy:    '#0A4A6E',
+            navyDark:'#083A56',
+            wa:      '#25D366',
+            ink:     '#0C0A09',
+            paper:   '#FAFAF9',
+            muted:   '#6B7280',
+            border:  '#E7E5E4',
+          },
+          maxWidth: { content: '1200px' }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FAFAF9; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #0C0A09; }
+    a { color: inherit; }
+    .wa-btn:active { transform: scale(0.97); }
+    .focus-ring:focus-visible { outline: 2px solid #0A4A6E; outline-offset: 3px; border-radius: 6px; }
+
+    /* ── RESPONSIVE HELPERS ─────────────────────── */
+
+    /* Nav */
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: flex; }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; align-items: center; gap: 28px; }
+      .mobile-menu-btn { display: none !important; }
+      .hero-content { padding: 120px 40px 104px !important; }
+      .hero-subtitle { font-size: 17px !important; max-width: 560px !important; }
+      .hero-eyebrow { font-size: 13px !important; padding: 7px 16px !important; }
+      .hero-h1 { font-size: 64px !important; letter-spacing: -0.032em !important; }
+      .hero-min-h { min-height: 640px !important; }
+    }
+
+    /* CTA block */
+    @media (min-width: 768px) {
+      .cta-wrap { max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* Trust strip */
+    @media (min-width: 768px) {
+      .trust-pills { gap: 10px 14px !important; }
+      .trust-pill  { font-size: 13px !important; padding: 5px 14px !important; }
+    }
+
+    /* Services grid */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+
+    /* Testimonial */
+    @media (min-width: 768px) {
+      .testimonial-inner { max-width: 640px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* Social links */
+    @media (min-width: 768px) {
+      .social-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    }
+    .social-grid { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Map grid */
+    @media (min-width: 768px) {
+      .map-grid { grid-template-columns: 1fr 1fr !important; }
+      .map-grid > div:last-child { min-height: 400px !important; }
+    }
+
+    /* Blog grid */
+    @media (min-width: 768px) {
+      .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    }
+    .blog-grid { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Footer */
+    .footer-grid { display: flex; flex-direction: column; gap: 28px; }
+    @media (min-width: 768px) {
+      .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; align-items: start; }
+      .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    }
+
+    /* Section max-width wrapper */
+    .section-inner { width: 100%; max-width: 1200px; margin: 0 auto; }
+
+    /* Logo marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .logo-track { display: flex; align-items: center; animation: marquee 28s linear infinite; width: max-content; gap: 0; }
+    .logo-track:hover { animation-play-state: paused; }
+    .logo-strip { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+
+    /* Blog carousel */
+    .blog-carousel { overflow: hidden; }
+    .blog-track { display: flex; transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .blog-slide { flex: 0 0 100%; padding: 0 8px; box-sizing: border-box; }
+    @media (min-width: 768px) {
+      .blog-slide { flex: 0 0 33.333%; }
+    }
+
+    /* Hero video */
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+
+    /* Refacciones grid */
+    @media (min-width: 768px) {
+      .refacciones-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+
+    /* Before/After */
+    .ba-img { transition: opacity 0.6s ease; }
+
+    /* Sticky nav shadow on scroll */
+    .nav-scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.10); }
+
+    /* ── FLOATING WHATSAPP ─────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 18px; right: 18px; z-index: 90;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.18);
+      transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 22px rgba(37,211,102,0.55), 0 2px 10px rgba(0,0,0,0.22); }
+    .wa-float::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 50%; background: #25D366;
+      animation: wa-ring 2.2s ease-out infinite; z-index: -1;
+    }
+    @keyframes wa-ring {
+      0%   { transform: scale(1);   opacity: .55; }
+      100% { transform: scale(1.8); opacity: 0;   }
+    }
+    @media (min-width: 768px) {
+      .wa-float { bottom: 24px; right: 24px; width: 64px; height: 64px; }
+    }
+
+    /* ── FAQ ──────────────────────────────────── */
+    .faq-item {
+      border: 1px solid #E7E5E4;
+      border-radius: 10px;
+      background: #fff;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      color: #0C0A09;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      color: #0A4A6E;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1;
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item summary:hover { background: #FAFAF9; }
+    .faq-item .faq-answer {
+      padding: 0 18px 18px;
+      color: #6B7280;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+
+
+
+
+
+const { useState, useEffect, useRef } = React;
+
+/* ─── DATA ─────────────────────────────────────────── */
+const BRANDS = ['Spectra', 'Sea Recovery', 'Schenker', 'Village Marine', 'Parker', 'HRO', 'Katadyn', 'Idronautica'];
+
+const BRAND_LOGOS = [
+{ name: 'Spectra Watermakers', src: 'uploads/SPECTRA LOGO VECTOR.png', h: 36 },
+{ name: 'Katadyn', src: 'uploads/KATDYN_LOGO_VECTOR.png', h: 32 },
+{ name: 'Pentair', src: 'uploads/PENTAIR LOGO VECTOR.png', h: 38 },
+{ name: 'FilmTec', src: 'uploads/FILMTEC LOGO VECTOR.png', h: 30 },
+{ name: 'CruiseRO Water', src: 'uploads/CRUISE_RO LOGO VECTOR.png', h: 42 },
+{ name: 'Cat Pumps', src: 'uploads/CAT PUMPS LOGO VECTOR.png', h: 44 },
+{ name: 'General Pump', src: 'uploads/GENERAL_PUMP-removebg-preview.png', h: 48 },
+{ name: 'March Pumps', src: 'uploads/LOGO VECTOR MARCH PUMPS.png', h: 44 },
+{ name: 'WEG', src: 'uploads/LOGO VECTOR WEG.png', h: 38 },
+{ name: 'Barrett', src: 'uploads/BARRET LOGO VECTOR.png', h: 36 }];
+
+
+const SERVICES = [
+{ icon: 'anchor', title: 'Marino', desc: 'Yates, veleros y embarcaciones de cualquier eslora. Salidas a marina incluidas.' },
+{ icon: 'home', title: 'Residencial', desc: 'Instalación y mantenimiento para casas y comunidades en BCS.' },
+{ icon: 'factory', title: 'Industrial', desc: 'Plantas de ósmosis inversa de alto volumen para hoteles y empresas.' }];
+
+
+const BLOG_POSTS = [
+/* TODO: reemplazar con posts reales */
+{ img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80', alt: 'Velero en marina de La Paz', tag: 'Mantenimiento', date: '12 abr 2025', title: '¿Cada cuánto debes cambiar las membranas de tu watermaker?' },
+{ img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', alt: 'Sistema de ósmosis inversa', tag: 'Guía técnica', date: '28 mar 2025', title: 'Los 5 síntomas que indican que tu desalador necesita servicio urgente' },
+{ img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80', alt: 'Yate en el Mar de Cortés', tag: 'Temporada', date: '10 mar 2025', title: 'Prepara tu watermaker para la temporada de cruceros en La Paz' }];
+
+
+const WA_NUMBER = '526121400253';
+const WA_MESSAGE = encodeURIComponent('Hola, necesito ayuda con mi watermaker.');
+const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
+const ACCENT = '#0A4A6E';
+
+/* ─── ICONS ─────────────────────────────────────────── */
+function Icon({ name, size = 20, style: extStyle = {}, className = '' }) {
+  const base = { width: size, height: size, strokeWidth: 1.75, fill: 'none', stroke: 'currentColor', strokeLinecap: 'round', strokeLinejoin: 'round', display: 'block', flexShrink: 0, ...extStyle };
+  const ns = { ...base, strokeWidth: 1.5 };
+  const icons = {
+    anchor: <svg viewBox="0 0 24 24" style={base} className={className}><circle cx="12" cy="5" r="3" /><line x1="12" y1="8" x2="12" y2="22" /><path d="M5 15H2a10 10 0 0 0 20 0h-3" /><line x1="5" y1="8" x2="19" y2="8" /></svg>,
+    home: <svg viewBox="0 0 24 24" style={base} className={className}><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" /><polyline points="9 21 9 12 15 12 15 21" /></svg>,
+    factory: <svg viewBox="0 0 24 24" style={base} className={className}><path d="M2 20h20" /><path d="M2 8l7 4V8l7 4V4l6 4v12H2V8z" /></svg>,
+    mapPin: <svg viewBox="0 0 24 24" style={base} className={className}><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>,
+    phone: <svg viewBox="0 0 24 24" style={base} className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.07 3.36 2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>,
+    clock: <svg viewBox="0 0 24 24" style={base} className={className}><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>,
+    globe: <svg viewBox="0 0 24 24" style={base} className={className}><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>,
+    fb: <svg viewBox="0 0 24 24" style={ns} className={className}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>,
+    ig: <svg viewBox="0 0 24 24" style={ns} className={className}><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>,
+    chevron: <svg viewBox="0 0 24 24" style={base} className={className}><polyline points="9 18 15 12 9 6" /></svg>,
+    star: <svg viewBox="0 0 24 24" style={{ ...base, fill: 'currentColor' }} className={className}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>,
+    shield: <svg viewBox="0 0 24 24" style={base} className={className}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>,
+    menu: <svg viewBox="0 0 24 24" style={base} className={className}><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>,
+    x: <svg viewBox="0 0 24 24" style={base} className={className}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>,
+    wa: <svg viewBox="0 0 32 32" style={{ width: size, height: size, display: 'block', flexShrink: 0, ...extStyle }} className={className}><path fill="currentColor" d="M16 3C9.37 3 4 8.37 4 15c0 2.39.67 4.63 1.83 6.54L4 29l7.67-1.8A12.9 12.9 0 0 0 16 28c6.63 0 12-5.37 12-12S22.63 3 16 3zm0 2c5.52 0 10 4.48 10 10S21.52 25 16 25c-1.9 0-3.67-.53-5.18-1.45L10 23.2l-1.38.32.34-1.34-.58-.87A9.94 9.94 0 0 1 6 15c0-5.52 4.48-10 10-10zm-3.06 5.06c-.26 0-.68.1-.94.38-.26.29-1 .98-1 2.38s1.02 2.76 1.16 2.95c.14.19 1.96 3.08 4.82 4.2 2.37.94 2.85.76 3.37.71.52-.05 1.67-.68 1.91-1.34.24-.66.24-1.23.17-1.34-.07-.1-.26-.17-.52-.29-.26-.12-1.53-.76-1.77-.84-.24-.1-.41-.14-.58.14-.17.26-.67.84-.82 1.02-.15.17-.3.19-.55.07-.26-.12-1.09-.4-2.07-1.28-.76-.68-1.28-1.52-1.43-1.78-.14-.26-.01-.4.11-.52.11-.11.26-.29.38-.43.12-.14.17-.24.24-.4.07-.17.04-.31-.02-.43-.07-.12-.58-1.38-.8-1.88-.21-.48-.43-.43-.58-.43h-.5z" /></svg>
+  };
+  return icons[name] || null;
+}
+
+/* ─── HOOKS ─────────────────────────────────────────── */
+function useScrolled(threshold = 10) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > threshold);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
+  }, [threshold]);
+  return scrolled;
+}
+
+/* ─── NAV ───────────────────────────────────────────── */
+function Nav({ accent }) {
+  const scrolled = useScrolled();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <>
+      <nav style={{
+        position: 'fixed',
+        top: 14, left: 14, right: 14,
+        zIndex: 100,
+        maxWidth: 1180,
+        margin: '0 auto',
+        borderRadius: 22,
+        background: scrolled
+          ? 'rgba(255,255,255,0.72)'
+          : 'rgba(8,20,36,0.52)',
+        backdropFilter: 'blur(24px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+        border: scrolled
+          ? '1px solid rgba(0,0,0,0.06)'
+          : '1px solid rgba(255,255,255,0.12)',
+        boxShadow: scrolled
+          ? '0 10px 32px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)'
+          : '0 12px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)',
+        transition: 'background .35s, border-color .35s, box-shadow .35s'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 22px', height: 72, letterSpacing: "0.2px" }}>
+          {/* Logo */}
+          <img
+            src="uploads/logo.webp"
+            alt="The Watermaker Store"
+            style={{ objectFit: "contain", margin: "0px", height: "54px", width: "auto", maxWidth: 190, display: "block" }} />
+
+
+          {/* Desktop links */}
+          <div className="nav-links" style={{ color: scrolled ? '#374151' : 'rgba(255,255,255,0.90)' }}>
+            {[['#servicios', 'Servicios'], ['#faq', 'FAQ'], ['#blog', 'Blog'], ['#contacto', 'Contacto']].map(([href, label]) =>
+            <a key={label} href={href} className="focus-ring" style={{
+              fontSize: 14, fontWeight: 500, textDecoration: 'none',
+              color: 'inherit', transition: 'opacity 0.15s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.65'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+              {label}</a>
+            )}
+          </div>
+
+          {/* Hamburger — visible only on mobile */}
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            style={{
+              border: 'none', background: 'none', cursor: 'pointer',
+              color: scrolled ? '#0C0A09' : '#fff', padding: 4,
+              display: 'flex', alignItems: 'center'
+            }}>
+            
+            <Icon name={menuOpen ? 'x' : 'menu'} size={22} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu drawer */}
+      {menuOpen &&
+      <div style={{
+        position: 'fixed', top: 96, left: 14, right: 14, zIndex: 99,
+        maxWidth: 1180, margin: '0 auto',
+        background: 'rgba(255,255,255,0.96)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        borderRadius: 18,
+        padding: '8px 18px 14px',
+        boxShadow: '0 12px 40px rgba(0,0,0,0.14)'
+      }}>
+          {[['#servicios', 'Servicios'], ['#faq', 'FAQ'], ['#blog', 'Blog'], ['#contacto', 'Contacto']].map(([href, label]) =>
+        <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
+          display: 'block', padding: '13px 0',
+          borderBottom: '1px solid rgba(0,0,0,0.06)',
+          fontSize: 15, fontWeight: 600, textDecoration: 'none', color: '#0C0A09'
+        }}>{label}</a>
+        )}
+        </div>
+      }
+    </>);
+
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+function Hero({ accent }) {
+  const videoRef = useRef(null);
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.7;
+  }, []);
+  return (
+    <header style={{ position: 'relative', overflow: 'hidden', minHeight: 520, background: '#04101e' }} className="hero-min-h">
+      <video
+        ref={videoRef}
+        className="hero-video"
+        autoPlay loop muted playsInline
+        poster="uploads/hero-marina.webp"
+        preload="metadata"
+        aria-hidden="true">
+        <source src="uploads/hf_20260424_055119_2771ce86-1ba9-44f0-a6ff-a8ccf8b6f402.mp4" type="video/mp4" />
+      </video>
+
+      {/* Radial vignette for AI-landing depth */}
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(3,12,24,0.30) 0%, rgba(3,12,24,0.62) 55%, rgba(3,12,24,0.90) 100%)' }} />
+      {/* Subtle noise / grid overlay for premium feel */}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.6, pointerEvents: 'none' }} />
+
+      <div className="hero-content section-inner" style={{ position: 'relative', zIndex: 1, padding: '96px 24px 88px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+
+        {/* Eyebrow pill */}
+        <div className="hero-eyebrow" style={{
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          padding: '6px 14px', borderRadius: 999,
+          background: 'rgba(255,255,255,0.06)',
+          border: '1px solid rgba(255,255,255,0.16)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          color: 'rgba(255,255,255,0.82)',
+          fontSize: 12, fontWeight: 500,
+          letterSpacing: '0.02em',
+          marginBottom: 28
+        }}>
+          <span style={{
+            width: 6, height: 6, borderRadius: '50%',
+            background: '#4ade80',
+            boxShadow: '0 0 0 3px rgba(74,222,128,0.22)'
+          }} aria-hidden="true" />
+          Centro autorizado · La Paz, B.C.S.
+        </div>
+
+        {/* H1 */}
+        <h1 className="hero-h1" style={{
+          fontSize: 40, fontWeight: 700, color: '#fff',
+          lineHeight: 1.04,
+          margin: '0 0 20px',
+          maxWidth: 760,
+          letterSpacing: '-0.028em',
+          textShadow: '0 2px 28px rgba(0,0,0,0.45)'
+        }}>
+          El agua que necesitas,<br />cuando más la necesitas.
+        </h1>
+
+        {/* Subtitle */}
+        <p className="hero-subtitle" style={{
+          fontSize: 16, color: 'rgba(255,255,255,0.68)',
+          margin: '0 0 38px', fontWeight: 400, lineHeight: 1.55,
+          maxWidth: 540
+        }}>
+          Servicio, refacciones e instalación de desaladores para yates, hogares e industria en Baja California Sur.
+        </p>
+
+        {/* CTA group */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'flex-start', alignItems: 'center' }}>
+          {/* Primary WhatsApp */}
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="focus-ring"
+            aria-label="Contáctanos por WhatsApp"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              padding: '14px 24px', borderRadius: 10,
+              background: '#25D366', color: '#fff',
+              fontWeight: 700, fontSize: 15, textDecoration: 'none',
+              boxShadow: '0 8px 24px rgba(37,211,102,0.30)',
+              transition: 'transform .18s, box-shadow .18s, background .18s',
+              minHeight: 50
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(37,211,102,0.45)'; e.currentTarget.style.background = '#1da851'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(37,211,102,0.30)'; e.currentTarget.style.background = '#25D366'; }}>
+            <Icon name="wa" size={20} />
+            Escríbenos por WhatsApp
+          </a>
+
+          {/* Secondary ghost */}
+          <a href="#servicios" className="focus-ring"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '13px 22px', borderRadius: 10,
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.20)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              color: '#fff', fontWeight: 600, fontSize: 15,
+              textDecoration: 'none',
+              transition: 'background .18s, border-color .18s'
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)'; }}>
+            Ver servicios
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+        </div>
+
+      </div>
+    </header>);
+
+}
+
+/* ─── BEFORE / AFTER ───────────────────────────────── */
+function BeforeAfter() {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <section style={{ padding: '56px 20px', background: '#fff', borderTop: '1px solid #E7E5E4' }}>
+      <div className="section-inner">
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Diagnóstico y reparación</p>
+          <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: '0 0 10px' }}>
+            {revealed ? '✓ Así lo devolvemos.' : '¿Tu equipo se ve así?'}
+          </h2>
+          <p style={{ fontSize: 15, color: '#6B7280', margin: 0 }}>
+            {revealed ? 'Limpio, calibrado y listo para otras 10,000 horas.' : 'No entres en pánico — lo hemos visto peor.'}
+          </p>
+        </div>
+
+        <div style={{ position: 'relative', maxWidth: 560, margin: '0 auto', borderRadius: 14, overflow: 'hidden', boxShadow: '0 6px 28px rgba(0,0,0,0.13)', cursor: revealed ? 'default' : 'pointer', height: 380 }}
+        onClick={() => !revealed && setRevealed(true)}>
+          
+          {/* ANTES */}
+          <img
+            src="uploads/Imagen de WhatsApp 2024-02-10 a las 12.42.08_915f384d.jpg"
+            alt="Bomba de desalador antes del servicio — corroída y desgastada"
+            className="ba-img"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: revealed ? 0 : 1, transition: 'opacity 0.7s ease' }} />
+          
+          {/* DESPUÉS */}
+          <img
+            src="uploads/Imagen de WhatsApp 2024-02-10 a las 14.56.36_511953ba.jpg"
+            alt="Bomba de desalador después del servicio — limpia y restaurada"
+            className="ba-img"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: revealed ? 1 : 0, transition: 'opacity 0.7s ease' }} />
+          
+
+          {/* Overlay CTA — visible solo antes de revelar */}
+          {!revealed &&
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to top, rgba(4,14,28,0.80) 0%, rgba(4,14,28,0.20) 60%, transparent 100%)',
+            display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center',
+            padding: '28px 20px'
+          }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 24px', borderRadius: 50, background: '#fff', color: '#0C0A09', fontWeight: 700, fontSize: 15, boxShadow: '0 2px 12px rgba(0,0,0,0.15)', animation: 'pulse-btn 2s ease-in-out infinite' }}>
+                <span>👆</span> Toca para ver el resultado
+              </div>
+            </div>
+          }
+
+          {/* Badge */}
+          <div style={{
+            position: 'absolute', top: 14, left: 14,
+            padding: '4px 10px', borderRadius: 6,
+            background: revealed ? '#22c55e' : '#ef4444',
+            color: '#fff', fontSize: 11, fontWeight: 700,
+            letterSpacing: '0.04em', transition: 'background 0.5s'
+          }}>
+            {revealed ? '✓ DESPUÉS' : 'ANTES'}
+          </div>
+        </div>
+
+        {revealed &&
+        <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <button
+            onClick={() => setRevealed(false)}
+            style={{ background: 'none', border: '1px solid #E7E5E4', borderRadius: 8, padding: '8px 18px', fontSize: 13, color: '#6B7280', cursor: 'pointer' }}>
+            ← Ver antes</button>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginLeft: 12, padding: '9px 18px', borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}>
+            
+              <Icon name="wa" size={16} />
+              Quiero este servicio
+            </a>
+          </div>
+        }
+      </div>
+      <style>{`@keyframes pulse-btn { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }`}</style>
+    </section>);
+
+}
+
+/* ─── BLOG CAROUSEL ─────────────────────────────────── */
+function BlogCarousel({ posts, ac }) {
+  const [idx, setIdx] = useState(0);
+  const isDesktop = window.innerWidth >= 768;
+  const visible = isDesktop ? 3 : 1;
+  const max = posts.length - visible;
+
+  const prev = () => setIdx((i) => Math.max(0, i - 1));
+  const next = () => setIdx((i) => Math.min(max, i + 1));
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div className="blog-carousel">
+        <div className="blog-track" style={{ transform: `translateX(-${idx * (100 / visible)}%)` }}>
+          {posts.map((p, i) =>
+          <div key={i} className="blog-slide">
+              <article style={{
+              background: '#fff', borderRadius: 12,
+              border: '1px solid #E7E5E4', overflow: 'hidden',
+              display: 'flex', flexDirection: 'column',
+              transition: 'box-shadow 0.18s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 4px 18px rgba(0,0,0,0.08)'}
+            onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}>
+              
+                <div style={{ position: 'relative', paddingBottom: '56%', background: '#E7E5E4', overflow: 'hidden' }}>
+                  <img src={p.img} alt={p.alt} loading="lazy"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <div style={{ padding: '16px 18px 20px', display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: ac, background: ac + '14', padding: '3px 8px', borderRadius: 4 }}>{p.tag}</span>
+                    <span style={{ fontSize: 11, color: '#9CA3AF' }}>{p.date}</span>
+                  </div>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0C0A09', margin: 0, lineHeight: 1.4, flex: 1 }}>{p.title}</h3>
+                  <a href="#" style={{ fontSize: 13, fontWeight: 600, color: ac, textDecoration: 'none', marginTop: 4 }}
+                aria-label={`Leer más: ${p.title}`}>Leer más →</a>
+                </div>
+              </article>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 20 }}>
+        <button onClick={prev} disabled={idx === 0} aria-label="Anterior"
+        style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid #E7E5E4', background: '#fff', cursor: idx === 0 ? 'not-allowed' : 'pointer', opacity: idx === 0 ? 0.4 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#374151', transition: 'opacity 0.15s' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+        </button>
+        {posts.map((_, i) =>
+        <span key={i} onClick={() => setIdx(Math.min(i, max))} style={{ width: i === idx ? 20 : 7, height: 7, borderRadius: 4, background: i === idx ? ac : '#D1D5DB', cursor: 'pointer', transition: 'width 0.25s, background 0.25s', display: 'inline-block' }} />
+        )}
+        <button onClick={next} disabled={idx >= max} aria-label="Siguiente"
+        style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid #E7E5E4', background: '#fff', cursor: idx >= max ? 'not-allowed' : 'pointer', opacity: idx >= max ? 0.4 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#374151', transition: 'opacity 0.15s' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+      </div>
+    </div>);
+
+}
+
+/* ─── APP ─────────────────────────────────────────────── */
+function App() {
+  const [tweaksVisible, setTweaksVisible] = useState(false);
+  const [tweaks, setTweaks] = useState(/*EDITMODE-BEGIN*/{
+    "accentColor": "#0A4A6E",
+    "showTestimonial": true,
+    "showBlog": true
+  } /*EDITMODE-END*/);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setTweaksVisible(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweaksVisible(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  function setTweak(key, val) {
+    const next = { ...tweaks, [key]: val };
+    setTweaks(next);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+  }
+
+  const ac = tweaks.accentColor;
+
+  return (
+    <div style={{ background: '#FAFAF9', minHeight: '100vh' }}>
+
+      {/* ── NAV ──────────────────────────────────── */}
+      <Nav accent={ac} />
+
+      {/* ── HERO ─────────────────────────────────── */}
+      <Hero accent={ac} />
+
+      {/* ── STATS STRIP ─────────────────────────── */}
+      <div style={{ background: '#fff', borderBottom: '1px solid #E7E5E4' }}>
+        <div className="section-inner" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', padding: '22px 0', width: '100%', maxWidth: 640, justifyContent: 'space-around', gap: '12px 0' }}>
+            {[['15+', 'Años de experiencia'], ['8', 'Marcas autorizadas'], ['100+', 'Embarcaciones atendidas']].map(([num, label]) =>
+            <div key={label} style={{ textAlign: 'center', padding: '0 16px' }}>
+                <p style={{ fontSize: 28, fontWeight: 700, color: '#0A4A6E', margin: 0, lineHeight: 1 }}>{num}</p>
+                <p style={{ fontSize: 11, color: '#9CA3AF', margin: '5px 0 0', fontWeight: 500 }}>{label}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── LOGO CAROUSEL ────────────────────── */}
+      <section style={{ borderTop: '1px solid #E7E5E4', borderBottom: '1px solid #E7E5E4', padding: '28px 0', background: '#fff' }}>
+        <p style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.09em', textAlign: 'center', marginBottom: 20 }}>
+          Marcas que distribuimos y serviciamos
+        </p>
+        <div className="logo-strip">
+          <div className="logo-track">
+            {[...BRAND_LOGOS, ...BRAND_LOGOS].map((logo, i) =>
+            <div key={i} style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 160, height: 60, margin: '0 20px' }}>
+                <img
+                src={logo.src}
+                alt={logo.name}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'grayscale(100%)', opacity: 0.6, transition: 'filter 0.2s, opacity 0.2s' }}
+                onMouseEnter={(e) => {e.target.style.filter = 'grayscale(0%)';e.target.style.opacity = '1';}}
+                onMouseLeave={(e) => {e.target.style.filter = 'grayscale(100%)';e.target.style.opacity = '0.6';}} />
+              
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICIOS ─────────────────────────── */}
+      <section id="servicios" style={{ padding: '48px 20px' }}>
+        <div className="section-inner">
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', marginBottom: 6, textAlign: 'center' }}>
+            ¿En qué podemos ayudarte?
+          </h2>
+          <p style={{ fontSize: 14, color: '#6B7280', textAlign: 'center', marginBottom: 24, marginTop: 0 }}>
+            Atendemos marino, residencial e industrial en toda Baja California Sur.
+          </p>
+          <div className="services-grid">
+            {SERVICES.map((s) =>
+            <div key={s.title} style={{
+              padding: '22px 18px', borderRadius: 12,
+              border: '1px solid #E7E5E4', background: '#fff',
+              display: 'flex', flexDirection: 'column', gap: 10
+            }}>
+                <div style={{
+                width: 42, height: 42, borderRadius: 10,
+                background: ac + '14', color: ac,
+                display: 'flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                  <Icon name={s.icon} size={20} />
+                </div>
+                <p style={{ fontSize: 15, fontWeight: 700, color: '#0C0A09', margin: 0 }}>{s.title}</p>
+                <p style={{ fontSize: 13, color: '#6B7280', margin: 0, lineHeight: 1.55 }}>{s.desc}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── REFACCIONES ─────────────────────────── */}
+      <section style={{ background: '#F9FAFB', borderTop: '1px solid #E7E5E4', padding: '56px 20px' }}>
+        <div className="section-inner">
+          <div className="refacciones-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32, alignItems: 'center' }}>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Refacciones</p>
+              <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: '0 0 14px', lineHeight: 1.2 }}>
+                Partes en inventario.<br />Sin esperas.
+              </h2>
+              <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.65, margin: '0 0 24px' }}>
+                Contamos con el mayor inventario de refacciones para desaladores en Baja California Sur — membranas, bombas, filtros, válvulas y más. Si lo necesitas hoy, lo tenemos hoy.
+              </p>
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', borderRadius: 8, background: '#0A4A6E', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none', transition: 'background 0.15s' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = '#083A56'}
+              onMouseLeave={(e) => e.currentTarget.style.background = '#0A4A6E'}>
+                
+                <Icon name="phone" size={16} />
+                Consultar disponibilidad
+              </a>
+            </div>
+            <div style={{ borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.10)' }}>
+              <img
+                src="uploads/Imagen de WhatsApp 2024-03-01 a las 13.38.37_be16fee0.jpg"
+                alt="Inventario de refacciones para desaladores en The Watermaker Store"
+                style={{ width: '100%', height: 320, objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── VAMOS A LA MARINA ───────────────────── */}
+      <section style={{ position: 'relative', overflow: 'hidden', minHeight: 360 }}>
+        <img
+          src="uploads/hero-residential.webp"
+          alt="Técnico de The Watermaker Store dando servicio en marina"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
+        
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,14,28,0.85) 0%, rgba(4,14,28,0.40) 60%, rgba(4,14,28,0.10) 100%)' }} />
+        <div className="section-inner" style={{ position: 'relative', zIndex: 1, padding: '64px 24px' }}>
+          <div style={{ maxWidth: 420 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Servicio marino</p>
+            <h2 style={{ fontSize: 28, fontWeight: 700, color: '#fff', margin: '0 0 14px', lineHeight: 1.2 }}>
+              Vamos hasta tu embarcación.
+            </h2>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: '0 0 28px' }}>
+              Salidas a Marina de La Paz, Marina Palmira y Puerto Escondido. Diagnóstico y reparación a bordo, sin mover tu yate.
+            </p>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '13px 22px', borderRadius: 9, background: 'rgba(37,211,102,0.18)', border: '1.5px solid rgba(37,211,102,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontWeight: 700, fontSize: 15, textDecoration: 'none', transition: 'background 0.2s' }}
+            onMouseEnter={(e) => {e.currentTarget.style.background = 'rgba(37,211,102,0.32)';}}
+            onMouseLeave={(e) => {e.currentTarget.style.background = 'rgba(37,211,102,0.18)';}}>
+              
+              <Icon name="wa" size={20} />
+              Agendar visita
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ANTES / DESPUÉS ─────────────────────── */}
+      <BeforeAfter />
+
+      {/* ── TESTIMONIO ──────────────────────────── */}
+      {tweaks.showTestimonial &&
+      <section style={{ padding: '0 20px 48px' }}>
+          <div className="section-inner">
+            <div className="testimonial-inner">
+              {/* TODO: reemplazar con testimonio real */}
+              <div style={{
+              background: '#fff', borderRadius: 12,
+              border: '1px solid #E7E5E4', padding: '28px 24px'
+            }}>
+                <div style={{ display: 'flex', gap: 4, marginBottom: 14 }} aria-label="5 de 5 estrellas">
+                  {[...Array(5)].map((_, i) => <Icon key={i} name="star" size={14} style={{ color: '#F59E0B' }} />)}
+                </div>
+                <blockquote style={{ fontSize: 15, color: '#374151', lineHeight: 1.65, margin: '0 0 18px', fontStyle: 'normal' }}>
+                  "Our Spectra Z-Brane failed two days before departing La Paz. Eduardo had us running again the same afternoon — parts in stock, full diagnostic. Best watermaker service we've found in Mexico."
+                </blockquote>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{
+                  width: 40, height: 40, borderRadius: '50%', background: '#E7E5E4', flexShrink: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#9CA3AF', fontSize: 13, fontWeight: 700
+                }}>RH</div>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: '#0C0A09', margin: 0 }}>Capt. Robert Haines</p>
+                    <p style={{ fontSize: 12, color: '#9CA3AF', margin: 0 }}>Chief Engineer · M/Y Serenity, 45 m · San Diego, CA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      {/* ── UBICACIÓN ────────────────────────── */}
+      <section id="ubicacion" style={{ borderTop: '1px solid #E7E5E4' }}>
+        <div className="section-inner">
+          <div className="map-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', alignItems: 'stretch' }}>
+
+            {/* Info card */}
+            <div style={{ padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: 18, justifyContent: 'center' }}>
+              <div>
+                <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Dónde encontrarnos</p>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', margin: '0 0 6px' }}>Visítanos en La Paz</h2>
+                <p style={{ fontSize: 14, color: '#6B7280', margin: 0 }}>We speak English 🇺🇸</p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#374151', textDecoration: 'none', fontSize: 14, lineHeight: 1.5 }}>
+                  <span style={{ marginTop: 2, color: '#0A4A6E', flexShrink: 0 }}><Icon name="mapPin" size={18} /></span>
+                  <span>Mariano Abasolo #2865, col. 5 de Febrero<br />23060 La Paz, B.C.S., México</span>
+                </a>
+                <a href="tel:+526121400253"
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#374151', textDecoration: 'none', fontSize: 14 }}>
+                  <span style={{ color: '#0A4A6E', flexShrink: 0 }}><Icon name="phone" size={18} /></span>
+                  +52 (612) 140-0253
+                </a>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#374151' }}>
+                  <span style={{ color: '#0A4A6E', flexShrink: 0 }}><Icon name="clock" size={18} /></span>
+                  Lun–Sáb · 9:00 – 18:00 h
+                </div>
+              </div>
+              <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', borderRadius: 8, background: '#0A4A6E', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none', alignSelf: 'flex-start', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background='#083A56'}
+                onMouseLeave={e => e.currentTarget.style.background='#0A4A6E'}
+              >
+                <Icon name="mapPin" size={16} />
+                Abrir en Google Maps
+              </a>
+            </div>
+
+            {/* Map iframe */}
+            <div style={{ minHeight: 320, background: '#E7E5E4' }}>
+              <iframe
+                title="Ubicación The Watermaker Store"
+                src="https://maps.google.com/maps?q=Mariano+Abasolo+2865,+La+Paz,+Baja+California+Sur,+Mexico&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="100%"
+                style={{ border: 0, minHeight: 320, display: 'block' }}
+                allowFullScreen loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+            {/* ── BLOG ─────────────────────────────────── */}
+      {tweaks.showBlog &&
+      <section id="blog" style={{ background: '#F9FAFB', borderTop: '1px solid #E7E5E4', padding: '48px 20px 56px' }}>
+          <div className="section-inner">
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', marginBottom: 6 }}>Últimos artículos</h2>
+            <p style={{ fontSize: 14, color: '#6B7280', marginBottom: 28, marginTop: 0 }}>
+              Consejos técnicos de Eduardo y el equipo de The Watermaker Store.
+            </p>
+            {/* TODO: reemplazar con posts reales del blog */}
+            <BlogCarousel posts={BLOG_POSTS} ac={ac} />
+          </div>
+        </section>
+      }
+
+      {/* ── FAQ ──────────────────────────────────── */}
+      <section id="faq" style={{ padding: '48px 20px 56px', background: '#fff', borderTop: '1px solid #E7E5E4' }}>
+        <div className="section-inner" style={{ maxWidth: 760 }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Preguntas frecuentes</p>
+            <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: 0 }}>Lo que más nos preguntan</h2>
+          </div>
+
+          {[
+            { q: '¿Qué marcas de desaladores atienden?', a: 'Somos centro de servicio autorizado para Spectra Watermakers, Sea Recovery, Schenker, Village Marine, Parker, HRO, Katadyn, Idronautica, Pentair, Cruise RO, FilmTec, Cat Pumps, General Pump, March Pumps y WEG. Si tu marca no está en la lista, llámanos — casi siempre podemos ayudar.' },
+            { q: '¿Atienden fuera de La Paz?', a: 'Sí. Hacemos salidas a Marina de La Paz, Marina Palmira, Puerto Escondido y proyectos en todo Baja California Sur. Para ubicaciones lejanas coordinamos logística por WhatsApp.' },
+            { q: '¿Cuánto tarda un servicio típico?', a: 'Diagnóstico el mismo día. Reparaciones menores 1–2 días. Overhauls completos 3–5 días, dependiendo de la disponibilidad de refacciones. Te damos tiempo estimado después del diagnóstico inicial.' },
+            { q: '¿Tienen refacciones en stock?', a: 'Tenemos el mayor inventario de refacciones para desaladores en BCS: membranas, bombas, filtros, válvulas, sellos y más. Lo que no tenemos lo conseguimos — trabajamos directamente con los fabricantes.' },
+            { q: '¿Cuánto cuesta reemplazar una membrana?', a: 'El costo depende del modelo y tamaño de tu watermaker. Escríbenos por WhatsApp con la marca y modelo de tu equipo (o una foto de la placa) y te damos cotización exacta el mismo día.' },
+            { q: '¿Dan servicio a sistemas industriales y residenciales?', a: 'Sí. Instalamos y damos mantenimiento a plantas de ósmosis inversa para hoteles, desarrollos residenciales, ranchos y empresas en toda BCS, además del servicio marino a embarcaciones.' },
+            { q: 'Do you speak English?', a: 'Yes, we speak English fluently. Welcome to all cruisers and international clients — we have served boats from the US, Canada, and Europe for over 15 years.' }
+          ].map((item, i) => (
+            <details key={i} className="faq-item">
+              <summary>{item.q}</summary>
+              <div className="faq-answer">{item.a}</div>
+            </details>
+          ))}
+
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <p style={{ fontSize: 14, color: '#6B7280', margin: '0 0 12px' }}>¿Tu pregunta no está aquí?</p>
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}>
+              <Icon name="wa" size={16} />
+              Pregúntanos por WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ─────────────────────────────── */}
+      <footer id="contacto" style={{ padding: '48px 20px 36px', background: "rgb(10, 74, 110)", color: "rgb(255, 255, 255)" }}>
+        <div className="section-inner">
+          <div className="footer-grid">
+
+            {/* Col 1: branding + contacto */}
+            <div>
+              <img
+                src="uploads/logo.webp"
+                alt="The Watermaker Store"
+                style={{ height: 52, width: 'auto', marginBottom: 20, display: 'block' }} />
+              
+              <p style={{ fontSize: 13, color: '#fff', marginBottom: 20, marginTop: 0, lineHeight: 1.6 }}>
+                "Trust in every drop" — El único centro de servicio autorizado para las principales marcas de desaladores en Baja California Sur.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer" className="focus-ring"
+                style={{ display: 'flex', alignItems: 'flex-start', gap: 8, color: '#fff', textDecoration: 'none', fontSize: 13, lineHeight: 1.5 }}>
+                  <span style={{ marginTop: 1 }}><Icon name="mapPin" size={15} /></span>
+                  Mariano Abasolo #2865, col. 5 de Febrero<br />23060 La Paz, B.C.S., México
+                </a>
+                <a href="tel:+526121400253" className="focus-ring"
+                style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', textDecoration: 'none', fontSize: 13 }}>
+                  <Icon name="phone" size={15} />+52 (612) 140-0253
+                </a>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#fff' }}>
+                  <Icon name="clock" size={15} />Lun–Sáb · 9:00 – 18:00 h
+                </div>
+              </div>
+            </div>
+
+            {/* Col 2: servicios */}
+            <div>
+              <p style={{ fontSize: 12, fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>
+                Servicios
+              </p>
+              {['Marino & Náutico', 'Residencial', 'Industrial', 'Refacciones', 'Instalación', 'Diagnóstico'].map((s) =>
+              <p key={s} style={{ fontSize: 13, color: '#fff', margin: '0 0 8px' }}>{s}</p>
+              )}
+            </div>
+
+            {/* Col 3: redes + CTA */}
+            <div>
+              <p style={{ fontSize: 12, fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>
+                Encuéntranos
+              </p>
+              {[
+              { icon: 'fb', label: 'Facebook', href: 'https://www.facebook.com/TheWaterMakerStore' },
+              { icon: 'ig', label: 'Instagram', href: 'https://instagram.com/the_watermaker_guys' },
+              { icon: 'globe', label: 'Sitio web', href: 'https://www.thewatermakerstore.com.mx/' }].
+              map((l) =>
+              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="focus-ring"
+              style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', textDecoration: 'none', fontSize: 13, marginBottom: 12, transition: 'opacity 0.15s' }}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+                
+                  <Icon name={l.icon} size={15} />{l.label}
+                </a>
+              )}
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 8,
+                background: '#25D366', color: '#fff', borderRadius: 8, padding: '11px 16px',
+                fontWeight: 600, fontSize: 14, textDecoration: 'none', transition: 'background 0.15s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = '#1da851'}
+              onMouseLeave={(e) => e.currentTarget.style.background = '#25D366'}>
+                
+                <Icon name="wa" size={18} />WhatsApp
+              </a>
+              <p style={{ fontSize: 12, color: '#fff', marginTop: 10, textAlign: 'center' }}>
+                🇺🇸 We speak English
+              </p>
+            </div>
+
+          </div>
+
+          {/* Bottom bar */}
+          <div className="footer-bottom" style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+            <p style={{ fontSize: 11, color: '#fff', margin: 0 }}>
+              © {new Date().getFullYear()} The Watermaker Store. Todos los derechos reservados.
+            </p>
+            <p style={{ fontSize: 11, color: '#fff', margin: 0 }}>La Paz, Baja California Sur, México</p>
+          </div>
+        </div>
+      </footer>
+
+      {/* ── TWEAKS PANEL ─────────────────────────── */}
+      {tweaksVisible &&
+      <div style={{
+        position: 'fixed', bottom: 20, right: 20, zIndex: 9999,
+        background: '#fff', borderRadius: 12, boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+        border: '1px solid #E7E5E4', padding: '16px', width: 240,
+        fontFamily: "'DM Sans', sans-serif", fontSize: 13
+      }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+            <span style={{ fontWeight: 700, color: '#0C0A09' }}>Tweaks</span>
+            <button onClick={() => {setTweaksVisible(false);window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');}}
+          style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#9CA3AF', fontSize: 20, lineHeight: 1 }} aria-label="Cerrar">×</button>
+          </div>
+          <label style={{ display: 'block', marginBottom: 14 }}>
+            <span style={{ display: 'block', fontSize: 11, color: '#6B7280', marginBottom: 5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Color de acento</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <input type="color" value={tweaks.accentColor} onChange={(e) => setTweak('accentColor', e.target.value)}
+            style={{ width: 32, height: 28, border: 'none', cursor: 'pointer', borderRadius: 4, padding: 0 }} />
+              <span style={{ fontSize: 12, color: '#6B7280' }}>{tweaks.accentColor}</span>
+            </div>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10, cursor: 'pointer' }}>
+            <span style={{ fontSize: 13, color: '#374151' }}>Mostrar testimonio</span>
+            <input type="checkbox" checked={tweaks.showTestimonial} onChange={(e) => setTweak('showTestimonial', e.target.checked)} />
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
+            <span style={{ fontSize: 13, color: '#374151' }}>Mostrar blog</span>
+            <input type="checkbox" checked={tweaks.showBlog} onChange={(e) => setTweak('showBlog', e.target.checked)} />
+          </label>
+        </div>
+      }
+
+      {/* ── FLOATING WHATSAPP ─────────────────── */}
+      <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+        className="wa-float focus-ring"
+        aria-label="Contáctanos por WhatsApp">
+        <Icon name="wa" size={30} />
+      </a>
+
+    </div>);
+
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

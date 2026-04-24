@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deploy Guide — The Watermaker Store en Cloudflare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #FAFAF9;
+      color: #0C0A09;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+    header.hero {
+      border-bottom: 1px solid #E7E5E4;
+      padding-bottom: 28px;
+      margin-bottom: 44px;
+    }
+    header.hero .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0A4A6E;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 38px;
+      line-height: 1.1;
+      letter-spacing: -0.028em;
+      margin: 0 0 14px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 17px;
+      color: #52525b;
+      max-width: 620px;
+      margin: 0;
+    }
+    h2 {
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      margin: 56px 0 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      font-weight: 700;
+    }
+    h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: #0A4A6E;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    h2 + .lead {
+      color: #6B7280;
+      margin: 0 0 20px;
+    }
+    h3 {
+      font-size: 17px;
+      margin: 26px 0 10px;
+      font-weight: 700;
+    }
+    p { margin: 0 0 14px; }
+    ul, ol { padding-left: 22px; margin: 0 0 16px; }
+    li { margin-bottom: 6px; }
+    a { color: #0A4A6E; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: 'JetBrains Mono', 'Menlo', monospace;
+      font-size: 13.5px;
+      background: #F4F4F5;
+      color: #0C0A09;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #E7E5E4;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 18px 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', 'Menlo', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 14px 0 22px;
+      border: 1px solid #1e293b;
+    }
+    pre code {
+      background: none; border: none; padding: 0; color: inherit;
+    }
+    .note, .warn, .tip {
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      border-left: 4px solid;
+      font-size: 14.5px;
+    }
+    .note { background: #EFF6FF; border-color: #2563EB; color: #1E3A8A; }
+    .warn { background: #FEF3C7; border-color: #D97706; color: #78350F; }
+    .tip  { background: #ECFDF5; border-color: #059669; color: #065F46; }
+    .note strong, .warn strong, .tip strong { font-weight: 700; }
+
+    .arch {
+      background: #fff;
+      border: 1px solid #E7E5E4;
+      border-radius: 12px;
+      padding: 22px;
+      margin: 8px 0 30px;
+    }
+    .arch pre {
+      margin: 0;
+      background: transparent;
+      color: #0C0A09;
+      border: none;
+      padding: 0;
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+    .checklist {
+      background: #fff;
+      border: 1px solid #E7E5E4;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 16px 0 30px;
+    }
+    .checklist h3 { margin-top: 0; }
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      align-items: flex-start;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .checklist input { margin-top: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14.5px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #E7E5E4;
+    }
+    th {
+      background: #F4F4F5;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    kbd {
+      background: #fff;
+      border: 1px solid #D4D4D8;
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    hr { border: none; border-top: 1px solid #E7E5E4; margin: 40px 0; }
+
+    nav.toc {
+      background: #fff;
+      border: 1px solid #E7E5E4;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 0 0 40px;
+    }
+    nav.toc p { margin: 0 0 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #0A4A6E; letter-spacing: 0.08em; }
+    nav.toc ol { margin: 4px 0 0; padding-left: 22px; }
+    nav.toc a { font-weight: 500; color: #0C0A09; }
+
+    .file-tree {
+      background: #F4F4F5;
+      border: 1px solid #E7E5E4;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #374151;
+      margin: 14px 0 22px;
+    }
+    .file-tree .dir { color: #0A4A6E; font-weight: 600; }
+    .file-tree .new { background: #dcfce7; color: #065f46; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <span class="eyebrow">Deploy Guide</span>
+  <h1>Subir The Watermaker Store a Cloudflare</h1>
+  <p class="subtitle">Pasos para poner el sitio en producción con Cloudflare Pages, gestor de blog vía CMS y reviews de Google de 5 estrellas en tiempo real.</p>
+</header>
+
+<nav class="toc">
+  <p>Contenido</p>
+  <ol>
+    <li><a href="#arch">Arquitectura</a></li>
+    <li><a href="#prereq">Prerrequisitos</a></li>
+    <li><a href="#fase1">Fase 1 — Preparar código y subir a GitHub</a></li>
+    <li><a href="#fase2">Fase 2 — Deploy a Cloudflare Pages</a></li>
+    <li><a href="#fase3">Fase 3 — Blog vía Decap CMS</a></li>
+    <li><a href="#fase4">Fase 4 — Worker de Google Reviews (5★)</a></li>
+    <li><a href="#fase5">Fase 5 — Conectar reviews al sitio</a></li>
+    <li><a href="#dominio">Fase 6 — Dominio personalizado (después)</a></li>
+    <li><a href="#checklist">Checklist final</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="arch"><span class="num">0</span> Arquitectura</h2>
+<p class="lead">Todo vive en Cloudflare, el código en GitHub, el blog se edita desde un panel web.</p>
+
+<div class="arch">
+<pre>
+GitHub (repo privado)
+    │
+    │  git push → auto-deploy
+    ▼
+Cloudflare Pages  ─────────── sirve index.html, uploads/, content/
+    │
+    ├─ /admin/             ── Decap CMS (panel visual del blog)
+    │
+    └─ fetch('/api/reviews') ───► Cloudflare Worker ──► Google Places API
+                                  (filtra solo 5★, cachea 1h)
+</pre>
+</div>
+
+<ul>
+  <li><strong>GitHub</strong> — fuente de verdad. Cada push dispara deploy automático.</li>
+  <li><strong>Cloudflare Pages</strong> — hosting estático con CDN global gratis.</li>
+  <li><strong>Decap CMS</strong> — panel de edición en <code>/admin/</code>, guarda los posts en el mismo repo.</li>
+  <li><strong>Cloudflare Worker</strong> — proxy que llama Google Places API, filtra solo reviews de 5 estrellas, cachea 1 hora.</li>
+</ul>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="prereq"><span class="num">0</span> Prerrequisitos</h2>
+
+<table>
+  <tr><th>Cuenta</th><th>Qué necesitas</th><th>Costo</th></tr>
+  <tr><td><strong>GitHub</strong></td><td>Cuenta gratuita + un repo privado para el sitio</td><td>Gratis</td></tr>
+  <tr><td><strong>Cloudflare</strong></td><td>Cuenta gratuita (crear en cloudflare.com)</td><td>Gratis</td></tr>
+  <tr><td><strong>Google Cloud</strong></td><td>Cuenta + Places API habilitada + API key</td><td>Gratis hasta ~100k req/mes</td></tr>
+  <tr><td><strong>Perfil de Google Business</strong></td><td>Ya verificado (para obtener el Place ID)</td><td>Gratis</td></tr>
+</table>
+
+<div class="note"><strong>Nota:</strong> Google Cloud pide tarjeta al habilitar Places API, pero el tier gratuito cubre más de lo que este sitio usará en años. Con el Worker cacheando 1 hora → máximo 720 llamadas/mes aunque tengas 100k visitas.</div>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="fase1"><span class="num">1</span> Preparar código y subir a GitHub</h2>
+<p class="lead">Convertir la carpeta local en un repo de Git y empujarlo a GitHub.</p>
+
+<h3>1.1 Crear el repo en GitHub</h3>
+<ol>
+  <li>Entra a <a href="https://github.com/new" target="_blank">github.com/new</a></li>
+  <li>Nombre: <code>thewatermakerstore</code> (o el que prefieras)</li>
+  <li>Visibilidad: <strong>Privado</strong> (recomendado)</li>
+  <li><strong>No</strong> agregues README, .gitignore ni licencia — lo haremos localmente</li>
+  <li>Click en <strong>Create repository</strong></li>
+</ol>
+
+<h3>1.2 Preparar archivos locales</h3>
+<p>Agrega un <code>.gitignore</code> en la raíz del proyecto para no subir basura:</p>
+
+<pre><code># .gitignore
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.env.local
+*.log
+.vscode/
+.idea/
+.wrangler/</code></pre>
+
+<h3>1.3 Inicializar git y subir</h3>
+<p>Abre una terminal en la carpeta del proyecto:</p>
+
+<pre><code>git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/thewatermakerstore.git
+git push -u origin main</code></pre>
+
+<div class="tip"><strong>Tip:</strong> Reemplaza <code>TU_USUARIO</code> con tu usuario real de GitHub. Si es la primera vez que haces push desde esta máquina, GitHub pedirá autenticación — usa un Personal Access Token o GitHub CLI (<code>gh auth login</code>).</div>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="fase2"><span class="num">2</span> Deploy a Cloudflare Pages</h2>
+<p class="lead">Conectar el repo de GitHub a Cloudflare y dejar que haga deploy automático.</p>
+
+<h3>2.1 Crear proyecto en Pages</h3>
+<ol>
+  <li>Entra al dashboard: <a href="https://dash.cloudflare.com" target="_blank">dash.cloudflare.com</a></li>
+  <li>Menú lateral → <strong>Workers &amp; Pages</strong></li>
+  <li>Click en <strong>Create application</strong> → tab <strong>Pages</strong> → <strong>Connect to Git</strong></li>
+  <li>Autoriza Cloudflare para acceder a tu GitHub</li>
+  <li>Selecciona el repo <code>thewatermakerstore</code></li>
+</ol>
+
+<h3>2.2 Configurar build</h3>
+<p>Como el sitio es HTML estático puro, <strong>no hay build</strong>. Usa estos valores:</p>
+
+<table>
+  <tr><th>Campo</th><th>Valor</th></tr>
+  <tr><td>Project name</td><td><code>thewatermakerstore</code></td></tr>
+  <tr><td>Production branch</td><td><code>main</code></td></tr>
+  <tr><td>Framework preset</td><td><strong>None</strong></td></tr>
+  <tr><td>Build command</td><td>(dejar vacío)</td></tr>
+  <tr><td>Build output directory</td><td><code>/</code></td></tr>
+</table>
+
+<p>Click en <strong>Save and Deploy</strong>. En 1–2 minutos tendrás una URL tipo:</p>
+<pre><code>https://thewatermakerstore.pages.dev</code></pre>
+
+<div class="tip"><strong>Auto-deploy activo:</strong> De aquí en adelante, cada <code>git push</code> a <code>main</code> redesplega el sitio automáticamente.</div>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="fase3"><span class="num">3</span> Blog vía Decap CMS</h2>
+<p class="lead">Panel web en <code>/admin</code> para que cualquiera pueda publicar posts sin tocar código.</p>
+
+<h3>3.1 Estructura de archivos a crear</h3>
+
+<div class="file-tree">
+thewatermakerstore/
+├── <span class="dir">admin/</span>              <span class="new">nuevo</span>
+│   ├── index.html       <span class="new">nuevo</span>
+│   └── config.yml       <span class="new">nuevo</span>
+├── <span class="dir">content/</span>            <span class="new">nuevo</span>
+│   └── posts.json       <span class="new">nuevo</span>
+├── <span class="dir">uploads/</span>
+│   └── <span class="dir">blog/</span>           <span class="new">nuevo</span>
+├── index.html
+└── ...
+</div>
+
+<h3>3.2 Crear <code>admin/index.html</code></h3>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;Admin — The Watermaker Store&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h3>3.3 Crear <code>admin/config.yml</code></h3>
+
+<pre><code>backend:
+  name: github
+  repo: TU_USUARIO/thewatermakerstore
+  branch: main
+  base_url: https://decap-oauth.TU_USUARIO.workers.dev
+  auth_endpoint: auth
+
+media_folder: "uploads/blog"
+public_folder: "/uploads/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    files:
+      - file: "content/posts.json"
+        label: "Artículos"
+        name: "posts"
+        fields:
+          - label: "Artículos"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Título",     name: "title",   widget: "string"}
+              - {label: "Slug",       name: "slug",    widget: "string", hint: "URL amigable, ej: mantenimiento-membranas"}
+              - {label: "Fecha",      name: "date",    widget: "datetime"}
+              - {label: "Etiqueta",   name: "tag",     widget: "select", options: ["Mantenimiento", "Guía técnica", "Temporada", "Instalación", "Refacciones"]}
+              - {label: "Imagen",     name: "img",     widget: "image"}
+              - {label: "Alt imagen", name: "alt",     widget: "string"}
+              - {label: "Resumen",    name: "excerpt", widget: "text"}
+              - {label: "Contenido",  name: "body",    widget: "markdown"}</code></pre>
+
+<h3>3.4 Crear <code>content/posts.json</code> inicial</h3>
+
+<pre><code>{
+  "posts": []
+}</code></pre>
+
+<h3>3.5 Desplegar OAuth proxy (Cloudflare Worker)</h3>
+
+<p>Decap CMS necesita autenticar contra GitHub. Esto requiere un pequeño Worker OAuth:</p>
+
+<ol>
+  <li>En GitHub: <strong>Settings → Developer Settings → OAuth Apps → New OAuth App</strong></li>
+  <li>Application name: <code>Watermaker CMS</code></li>
+  <li>Homepage URL: <code>https://thewatermakerstore.pages.dev</code></li>
+  <li>Authorization callback: <code>https://decap-oauth.TU_USUARIO.workers.dev/callback</code></li>
+  <li>Copia el <strong>Client ID</strong> y <strong>Client Secret</strong></li>
+</ol>
+
+<p>Despliega el Worker OAuth. Hay uno listo de la comunidad:</p>
+
+<pre><code>git clone https://github.com/sterlingwes/decap-proxy decap-oauth
+cd decap-oauth
+npx wrangler login
+npx wrangler secret put GITHUB_CLIENT_ID
+npx wrangler secret put GITHUB_CLIENT_SECRET
+npx wrangler deploy</code></pre>
+
+<div class="note"><strong>Alternativa más simple:</strong> Sveltia CMS (fork de Decap con mejor soporte Cloudflare, no requiere OAuth proxy si usas GitHub Personal Access Token). <a href="https://github.com/sveltia/sveltia-cms" target="_blank">Ver docs</a>.</div>
+
+<h3>3.6 Acceder al CMS</h3>
+<p>Una vez que hagas deploy, entra a:</p>
+<pre><code>https://thewatermakerstore.pages.dev/admin/</code></pre>
+<p>Inicia sesión con GitHub → ya puedes crear, editar y publicar posts desde una UI visual. Cada cambio se guarda como commit en el repo y dispara redespliegue automático.</p>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="fase4"><span class="num">4</span> Worker de Google Reviews (filtrando 5★)</h2>
+<p class="lead">Proxy que llama Google Places API, regresa solo reviews de 5 estrellas y cachea 1 hora.</p>
+
+<h3>4.1 Habilitar Google Places API</h3>
+<ol>
+  <li>Entra a <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a></li>
+  <li>Crea un proyecto nuevo: <code>watermaker-reviews</code></li>
+  <li>Busca <strong>Places API</strong> en la barra → <strong>Enable</strong></li>
+  <li>Ve a <strong>APIs &amp; Services → Credentials</strong> → <strong>Create API Key</strong></li>
+  <li>Copia la API key (la necesitamos)</li>
+  <li>Click en la key → <strong>Restrict key</strong>:
+    <ul>
+      <li>API restrictions → solo <strong>Places API</strong></li>
+      <li>Application restrictions → <strong>None</strong> (el Worker la usa desde el servidor)</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>4.2 Obtener Place ID del negocio</h3>
+<ol>
+  <li>Entra a <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank">Place ID Finder</a></li>
+  <li>Busca <strong>The Watermaker Store La Paz</strong></li>
+  <li>Copia el Place ID (empieza con <code>ChIJ...</code>)</li>
+</ol>
+
+<h3>4.3 Crear el Worker</h3>
+
+<p>En tu terminal, crea el proyecto del Worker:</p>
+
+<pre><code>npm create cloudflare@latest reviews-worker
+# Selecciona: "Hello World" Worker
+# TypeScript: No
+# Deploy: No (lo haremos después)
+
+cd reviews-worker</code></pre>
+
+<p>Reemplaza <code>src/index.js</code> con:</p>
+
+<pre><code>export default {
+  async fetch(request, env, ctx) {
+    // Solo aceptamos GET
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Max-Age': '86400'
+        }
+      });
+    }
+
+    // Cache edge 1 hora
+    const cacheKey = new Request(request.url, request);
+    const cache = caches.default;
+    let response = await cache.match(cacheKey);
+    if (response) return response;
+
+    const url = new URL(
+      'https://maps.googleapis.com/maps/api/place/details/json'
+    );
+    url.searchParams.set('place_id', env.PLACE_ID);
+    url.searchParams.set('fields', 'reviews,rating,user_ratings_total,name');
+    url.searchParams.set('language', 'es');
+    url.searchParams.set('key', env.GOOGLE_API_KEY);
+
+    const apiRes = await fetch(url.toString());
+    const data = await apiRes.json();
+
+    if (data.status !== 'OK') {
+      return new Response(JSON.stringify({ error: data.status }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+      });
+    }
+
+    // Filtrar solo 5 estrellas
+    const fiveStar = (data.result.reviews || [])
+      .filter(r => r.rating === 5)
+      .map(r => ({
+        author: r.author_name,
+        photo: r.profile_photo_url,
+        rating: r.rating,
+        text: r.text,
+        relative_time: r.relative_time_description,
+        time: r.time
+      }));
+
+    const payload = {
+      business: data.result.name,
+      overall_rating: data.result.rating,
+      total_reviews: data.result.user_ratings_total,
+      five_star_reviews: fiveStar
+    };
+
+    response = new Response(JSON.stringify(payload), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'public, max-age=3600'
+      }
+    });
+
+    ctx.waitUntil(cache.put(cacheKey, response.clone()));
+    return response;
+  }
+};</code></pre>
+
+<h3>4.4 Variables y deploy</h3>
+
+<pre><code># Guarda los secrets (no entran al repo)
+npx wrangler secret put GOOGLE_API_KEY
+# (te pide el valor, pégalo y enter)
+
+npx wrangler secret put PLACE_ID
+# (pega el Place ID ChIJ... y enter)
+
+# Deploy
+npx wrangler deploy</code></pre>
+
+<p>Obtendrás una URL tipo:</p>
+<pre><code>https://reviews-worker.TU_USUARIO.workers.dev</code></pre>
+
+<h3>4.5 Pruebas</h3>
+<p>Abre en el navegador:</p>
+<pre><code>https://reviews-worker.TU_USUARIO.workers.dev</code></pre>
+<p>Deberías ver un JSON con las reviews de 5 estrellas.</p>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="fase5"><span class="num">5</span> Conectar reviews al sitio</h2>
+<p class="lead">Reemplazar el testimonio placeholder del <code>index.html</code> con reviews reales del Worker.</p>
+
+<h3>5.1 Reemplazar el componente de testimonio</h3>
+
+<p>En <code>index.html</code>, agrega este hook junto a los otros (<code>useScrolled</code>, etc.):</p>
+
+<pre><code>const REVIEWS_URL = 'https://reviews-worker.TU_USUARIO.workers.dev';
+
+function useGoogleReviews() {
+  const [data, setData] = useState({ reviews: [], loading: true, error: null });
+  useEffect(() =&gt; {
+    fetch(REVIEWS_URL)
+      .then(r =&gt; r.json())
+      .then(d =&gt; setData({
+        reviews: d.five_star_reviews || [],
+        rating: d.overall_rating,
+        total: d.total_reviews,
+        loading: false,
+        error: null
+      }))
+      .catch(err =&gt; setData({ reviews: [], loading: false, error: err.message }));
+  }, []);
+  return data;
+}</code></pre>
+
+<p>Y reemplaza el componente de testimonio por uno que use los datos del Worker. Esto lo podemos hacer juntos en otra sesión cuando ya tengas la URL del Worker real.</p>
+
+<h3>5.2 Conectar el blog a <code>content/posts.json</code></h3>
+
+<p>En <code>index.html</code>, reemplaza el array <code>BLOG_POSTS</code> hardcodeado por un fetch a <code>/content/posts.json</code>:</p>
+
+<pre><code>function useBlogPosts() {
+  const [posts, setPosts] = useState([]);
+  useEffect(() =&gt; {
+    fetch('/content/posts.json')
+      .then(r =&gt; r.json())
+      .then(d =&gt; setPosts(d.posts || []))
+      .catch(() =&gt; setPosts([]));
+  }, []);
+  return posts;
+}</code></pre>
+
+<div class="tip"><strong>Tip:</strong> Estos dos cambios del <code>index.html</code> son el último paso. Puedo ayudarte a implementarlos cuando ya tengas las URLs del Worker y confirmado que el CMS funciona.</div>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="dominio"><span class="num">6</span> Dominio personalizado (cuando se libere)</h2>
+<p class="lead">Cuando <code>thewatermakerstore.com.mx</code> esté disponible y lo compres, conéctalo a Cloudflare.</p>
+
+<ol>
+  <li>Compra el dominio (Cloudflare Registrar es el más barato y ya estás en su ecosistema)</li>
+  <li>Dashboard → <strong>Workers &amp; Pages → thewatermakerstore → Custom domains</strong></li>
+  <li><strong>Set up a custom domain</strong> → escribe <code>thewatermakerstore.com.mx</code></li>
+  <li>Si ya está en Cloudflare, configura DNS automático</li>
+  <li>Espera propagación (5–30 min)</li>
+  <li>Actualiza en <code>index.html</code> todas las referencias a <code>www.thewatermakerstore.com.mx</code> (og:url, canonical, etc.) — ya están puestas</li>
+</ol>
+
+<!-- ─────────────────────────────────────────── -->
+
+<h2 id="checklist"><span class="num">✓</span> Checklist final</h2>
+
+<div class="checklist">
+  <h3>Antes del deploy</h3>
+  <label><input type="checkbox" /> Repositorio creado en GitHub</label>
+  <label><input type="checkbox" /> <code>.gitignore</code> agregado</label>
+  <label><input type="checkbox" /> Primer push a <code>main</code> exitoso</label>
+
+  <h3>Cloudflare Pages</h3>
+  <label><input type="checkbox" /> Proyecto Pages creado y conectado al repo</label>
+  <label><input type="checkbox" /> Primer deploy visible en <code>thewatermakerstore.pages.dev</code></label>
+  <label><input type="checkbox" /> Auto-deploy verificado (un push se redespliega)</label>
+
+  <h3>CMS</h3>
+  <label><input type="checkbox" /> Carpetas <code>admin/</code> y <code>content/</code> creadas</label>
+  <label><input type="checkbox" /> GitHub OAuth App creada</label>
+  <label><input type="checkbox" /> Worker OAuth desplegado</label>
+  <label><input type="checkbox" /> Login en <code>/admin/</code> funciona</label>
+  <label><input type="checkbox" /> Post de prueba publicado desde el panel</label>
+
+  <h3>Google Reviews</h3>
+  <label><input type="checkbox" /> Places API habilitada en Google Cloud</label>
+  <label><input type="checkbox" /> API key creada y restringida</label>
+  <label><input type="checkbox" /> Place ID copiado</label>
+  <label><input type="checkbox" /> Worker desplegado, responde con JSON</label>
+  <label><input type="checkbox" /> Reviews de 5★ visibles al llamar el endpoint</label>
+
+  <h3>Integración final</h3>
+  <label><input type="checkbox" /> <code>index.html</code> usa <code>fetch</code> para blog posts</label>
+  <label><input type="checkbox" /> <code>index.html</code> usa <code>fetch</code> para reviews</label>
+  <label><input type="checkbox" /> Prueba end-to-end: crear post en CMS → aparece en producción</label>
+  <label><input type="checkbox" /> Prueba end-to-end: reviews visibles en la home</label>
+</div>
+
+<hr />
+
+<p style="color: #6B7280; font-size: 14px; text-align: center;">
+  Generado para The Watermaker Store · Deploy Guide v1.0
+</p>
+
+</main>
+</body>
+</html>
