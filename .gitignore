@@ -27,3 +27,6 @@ yarn-error.log*
 # Scratch screenshots dropped in repo root
 /WhatsApp Image *
 /Screenshot*
+
+.dev.vars*
+!.dev.vars.example
