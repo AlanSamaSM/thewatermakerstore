@@ -122,11 +122,11 @@
     @media (min-width: 768px) {
       .nav-links { display: flex; align-items: center; gap: 28px; }
       .mobile-menu-btn { display: none !important; }
-      .hero-content { padding: 120px 40px 104px !important; }
+      .hero-content { min-height: 100svh !important; padding: 132px 40px 92px !important; }
       .hero-subtitle { font-size: 17px !important; max-width: 560px !important; }
       .hero-eyebrow { font-size: 13px !important; padding: 7px 16px !important; }
       .hero-h1 { font-size: 64px !important; letter-spacing: -0.032em !important; }
-      .hero-min-h { min-height: 640px !important; }
+      .hero-min-h { min-height: calc(100svh + 64px) !important; }
     }
 
     /* CTA block */
@@ -358,6 +358,56 @@ function useBlogPosts() {
   return posts;
 }
 
+function AnimatedStat({ value, suffix = '', label }) {
+  const statRef = useRef(null);
+  const [started, setStarted] = useState(false);
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    const node = statRef.current;
+    if (!node || started) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setStarted(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.45 });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+
+    let frameId;
+    const duration = 1400;
+    const startedAt = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(value * eased));
+      if (progress < 1) frameId = requestAnimationFrame(tick);
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [started, value]);
+
+  return (
+    <div ref={statRef} style={{ textAlign: 'center', padding: '0 16px' }}>
+      <p style={{ fontSize: 28, fontWeight: 700, color: '#0A4A6E', margin: 0, lineHeight: 1 }}>{displayValue}{suffix}</p>
+      <p style={{ fontSize: 11, color: '#9CA3AF', margin: '5px 0 0', fontWeight: 500 }}>{label}</p>
+    </div>);
+}
+
 /* ─── NAV ───────────────────────────────────────────── */
 function Nav({ accent }) {
   const scrolled = useScrolled();
@@ -455,7 +505,7 @@ function Hero({ accent }) {
     if (videoRef.current) videoRef.current.playbackRate = 0.7;
   }, []);
   return (
-    <header style={{ position: 'relative', overflow: 'hidden', minHeight: 520, background: '#04101e' }} className="hero-min-h">
+    <header style={{ position: 'relative', overflow: 'hidden', minHeight: '100svh', background: '#04101e' }} className="hero-min-h">
       <video
         ref={videoRef}
         className="hero-video"
@@ -471,7 +521,7 @@ function Hero({ accent }) {
       {/* Subtle noise / grid overlay for premium feel */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '28px 28px', opacity: 0.6, pointerEvents: 'none' }} />
 
-      <div className="hero-content section-inner" style={{ position: 'relative', zIndex: 1, padding: '96px 24px 88px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+      <div className="hero-content section-inner" style={{ position: 'relative', zIndex: 1, minHeight: '100svh', padding: '112px 24px 72px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', textAlign: 'left' }}>
 
         {/* H1 */}
         <h1 className="hero-h1" style={{
@@ -707,6 +757,11 @@ function App() {
 
   const ac = tweaks.accentColor;
   const posts = useBlogPosts();
+  const stats = [
+    { value: 15, suffix: '+', label: 'Años de experiencia' },
+    { value: 8, label: 'Marcas autorizadas' },
+    { value: 100, suffix: '+', label: 'Embarcaciones atendidas' }
+  ];
 
   return (
     <div style={{ background: '#FAFAF9', minHeight: '100vh' }}>
@@ -721,11 +776,8 @@ function App() {
       <div style={{ background: '#fff', borderBottom: '1px solid #E7E5E4' }}>
         <div className="section-inner" style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', padding: '22px 0', width: '100%', maxWidth: 640, justifyContent: 'space-around', gap: '12px 0' }}>
-            {[['15+', 'Años de experiencia'], ['8', 'Marcas autorizadas'], ['100+', 'Embarcaciones atendidas']].map(([num, label]) =>
-            <div key={label} style={{ textAlign: 'center', padding: '0 16px' }}>
-                <p style={{ fontSize: 28, fontWeight: 700, color: '#0A4A6E', margin: 0, lineHeight: 1 }}>{num}</p>
-                <p style={{ fontSize: 11, color: '#9CA3AF', margin: '5px 0 0', fontWeight: 500 }}>{label}</p>
-              </div>
+            {stats.map((stat) =>
+            <AnimatedStat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} />
             )}
           </div>
         </div>
