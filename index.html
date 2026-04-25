@@ -143,11 +143,6 @@
     /* Services grid */
     .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 
-    /* Testimonial */
-    @media (min-width: 768px) {
-      .testimonial-inner { max-width: 640px; margin-left: auto; margin-right: auto; }
-    }
-
     /* Social links */
     @media (min-width: 768px) {
       .social-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
@@ -478,27 +473,6 @@ function Hero({ accent }) {
 
       <div className="hero-content section-inner" style={{ position: 'relative', zIndex: 1, padding: '96px 24px 88px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
 
-        {/* Eyebrow pill */}
-        <div className="hero-eyebrow" style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '6px 14px', borderRadius: 999,
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.16)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          color: 'rgba(255,255,255,0.82)',
-          fontSize: 12, fontWeight: 500,
-          letterSpacing: '0.02em',
-          marginBottom: 28
-        }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: '50%',
-            background: '#4ade80',
-            boxShadow: '0 0 0 3px rgba(74,222,128,0.22)'
-          }} aria-hidden="true" />
-          Centro autorizado · La Paz, B.C.S.
-        </div>
-
         {/* H1 */}
         <h1 className="hero-h1" style={{
           fontSize: 40, fontWeight: 700, color: '#fff',
@@ -712,7 +686,6 @@ function App() {
   const [tweaksVisible, setTweaksVisible] = useState(false);
   const [tweaks, setTweaks] = useState(/*EDITMODE-BEGIN*/{
     "accentColor": "#0A4A6E",
-    "showTestimonial": true,
     "showBlog": true
   } /*EDITMODE-END*/);
 
@@ -875,38 +848,6 @@ function App() {
       {/* ── ANTES / DESPUÉS ─────────────────────── */}
       <BeforeAfter />
 
-      {/* ── TESTIMONIO ──────────────────────────── */}
-      {tweaks.showTestimonial &&
-      <section style={{ padding: '0 20px 48px' }}>
-          <div className="section-inner">
-            <div className="testimonial-inner">
-              {/* TODO: reemplazar con testimonio real */}
-              <div style={{
-              background: '#fff', borderRadius: 12,
-              border: '1px solid #E7E5E4', padding: '28px 24px'
-            }}>
-                <div style={{ display: 'flex', gap: 4, marginBottom: 14 }} aria-label="5 de 5 estrellas">
-                  {[...Array(5)].map((_, i) => <Icon key={i} name="star" size={14} style={{ color: '#F59E0B' }} />)}
-                </div>
-                <blockquote style={{ fontSize: 15, color: '#374151', lineHeight: 1.65, margin: '0 0 18px', fontStyle: 'normal' }}>
-                  "Our Spectra Z-Brane failed two days before departing La Paz. Eduardo had us running again the same afternoon — parts in stock, full diagnostic. Best watermaker service we've found in Mexico."
-                </blockquote>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{
-                  width: 40, height: 40, borderRadius: '50%', background: '#E7E5E4', flexShrink: 0,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#9CA3AF', fontSize: 13, fontWeight: 700
-                }}>RH</div>
-                  <div>
-                    <p style={{ fontSize: 13, fontWeight: 700, color: '#0C0A09', margin: 0 }}>Capt. Robert Haines</p>
-                    <p style={{ fontSize: 12, color: '#9CA3AF', margin: 0 }}>Chief Engineer · M/Y Serenity, 45 m · San Diego, CA</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      }
 
       {/* ── UBICACIÓN ────────────────────────── */}
       <section id="ubicacion" style={{ borderTop: '1px solid #E7E5E4' }}>
@@ -1116,10 +1057,6 @@ function App() {
             style={{ width: 32, height: 28, border: 'none', cursor: 'pointer', borderRadius: 4, padding: 0 }} />
               <span style={{ fontSize: 12, color: '#6B7280' }}>{tweaks.accentColor}</span>
             </div>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10, cursor: 'pointer' }}>
-            <span style={{ fontSize: 13, color: '#374151' }}>Mostrar testimonio</span>
-            <input type="checkbox" checked={tweaks.showTestimonial} onChange={(e) => setTweak('showTestimonial', e.target.checked)} />
           </label>
           <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
             <span style={{ fontSize: 13, color: '#374151' }}>Mostrar blog</span>
