@@ -141,6 +141,13 @@
     }
     .blog-grid { display: flex; flex-direction: column; gap: 16px; }
 
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    .contact-form-row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 900px) {
+      .contact-grid { grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.64fr); gap: 40px; align-items: stretch; }
+    }
+
     /* Footer */
     .footer-grid { display: flex; flex-direction: column; gap: 28px; }
     @media (min-width: 768px) {

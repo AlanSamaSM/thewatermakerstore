@@ -1,0 +1,6 @@
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+CONTACT_TO_EMAIL=tu-correo@dominio.com
+CONTACT_FROM_EMAIL=The Watermaker Store <contacto@tu-dominio-verificado.com>
+TURNSTILE_SITE_KEY=0x4AAAAAAAAAAAAAAAAAAAAA
+TURNSTILE_SECRET_KEY=0x4AAAAAAAAAAAAAAAAAAAAA
+

@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "bunx --package esbuild ./app.jsx --bundle --outfile=./app.js --target=es2018 --format=iife --minify --jsx-factory=React.createElement --jsx-fragment=React.Fragment --legal-comments=none",
+    "preview": "bunx --package wrangler wrangler pages dev .",
+    "preview:port": "bunx --package wrangler wrangler pages dev . --port 8788"
+  }
+}

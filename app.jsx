@@ -269,22 +269,22 @@ function Hero({ accent }) {
 
         {/* CTA group */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'flex-start', alignItems: 'center' }}>
-          {/* Primary WhatsApp */}
-          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="focus-ring"
-            aria-label="Contáctanos por WhatsApp"
+          {/* Primary contact CTA */}
+          <a href="#contacto" className="focus-ring"
+            aria-label="Ir a la sección de contacto"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
               padding: '14px 24px', borderRadius: 10,
-              background: '#25D366', color: '#fff',
+              background: '#38BDF8', color: '#04101E',
               fontWeight: 700, fontSize: 15, textDecoration: 'none',
-              boxShadow: '0 8px 24px rgba(37,211,102,0.30)',
+              boxShadow: '0 10px 30px rgba(56,189,248,0.34)',
               transition: 'transform .18s, box-shadow .18s, background .18s',
               minHeight: 50
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(37,211,102,0.45)'; e.currentTarget.style.background = '#1da851'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(37,211,102,0.30)'; e.currentTarget.style.background = '#25D366'; }}>
-            <Icon name="wa" size={20} />
-            Escríbenos por WhatsApp
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 34px rgba(56,189,248,0.48)'; e.currentTarget.style.background = '#7DD3FC'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(56,189,248,0.34)'; e.currentTarget.style.background = '#38BDF8'; }}>
+            Contactar ahora
+            <Icon name="chevron" size={18} />
           </a>
 
           {/* Secondary ghost */}
@@ -459,6 +459,317 @@ function BlogCarousel({ posts, ac }) {
 }
 
 /* ─── APP ─────────────────────────────────────────────── */
+function ContactSection({ accent }) {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [siteKey, setSiteKey] = useState('');
+  const [configStatus, setConfigStatus] = useState('loading');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [formState, setFormState] = useState({ status: 'idle', message: '' });
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch('/api/contact-config', { cache: 'no-store' })
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (cancelled) return;
+        if (data?.siteKey) {
+          setConfigStatus('ready');
+          setSiteKey(data.siteKey);
+        } else {
+          setConfigStatus('missing');
+          setFormState({
+            status: 'error',
+            message: 'El formulario aun no esta configurado. Contactanos por WhatsApp.'
+          });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setConfigStatus('error');
+          setFormState({
+            status: 'error',
+            message: 'No pudimos preparar el formulario. Intenta por WhatsApp mientras lo revisamos.'
+          });
+        }
+      });
+
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    if (!siteKey || !turnstileRef.current) return;
+
+    let cancelled = false;
+
+    function renderTurnstile() {
+      if (cancelled || !window.turnstile || !turnstileRef.current || widgetIdRef.current !== null) return;
+
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: siteKey,
+        callback: (token) => setTurnstileToken(token),
+        'expired-callback': () => setTurnstileToken(''),
+        'error-callback': () => {
+          setTurnstileToken('');
+          setFormState({ status: 'error', message: 'No se pudo verificar el formulario. Recarga e intenta otra vez.' });
+        }
+      });
+    }
+
+    if (window.turnstile) {
+      renderTurnstile();
+    } else {
+      const existingScript = document.querySelector('script[data-turnstile-script="true"]');
+      if (existingScript) {
+        existingScript.addEventListener('load', renderTurnstile, { once: true });
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.async = true;
+        script.defer = true;
+        script.dataset.turnstileScript = 'true';
+        script.addEventListener('load', renderTurnstile, { once: true });
+        document.head.appendChild(script);
+      }
+    }
+
+    return () => {
+      cancelled = true;
+      if (window.turnstile && widgetIdRef.current !== null) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, [siteKey]);
+
+  function resetTurnstile() {
+    if (window.turnstile && widgetIdRef.current !== null) {
+      window.turnstile.reset(widgetIdRef.current);
+    }
+    setTurnstileToken('');
+  }
+
+  function validateForm() {
+    const cleanEmail = email.trim();
+    const cleanMessage = message.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(cleanEmail)) return 'Escribe un correo valido para poder responderte.';
+    if (cleanMessage.length < 10) return 'Cuentanos un poco mas para poder orientarte bien.';
+    if (cleanMessage.length > 1500) return 'El mensaje es muy largo. Resume la solicitud en menos de 1500 caracteres.';
+    if (configStatus !== 'ready') return 'El formulario aun no esta configurado. Contactanos por WhatsApp.';
+    if (!turnstileToken) return 'Completa la verificacion para enviar el mensaje.';
+    return '';
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const validationError = validateForm();
+    if (validationError) {
+      setFormState({ status: 'error', message: validationError });
+      return;
+    }
+
+    setFormState({ status: 'loading', message: 'Enviando mensaje...' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          message: message.trim(),
+          turnstileToken
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || 'No pudimos enviar tu mensaje. Intenta nuevamente.');
+      }
+
+      setEmail('');
+      setMessage('');
+      setFormState({ status: 'success', message: 'Mensaje enviado. Te responderemos pronto.' });
+      resetTurnstile();
+    } catch (err) {
+      setFormState({ status: 'error', message: err.message || 'No pudimos enviar tu mensaje. Intenta por WhatsApp.' });
+      resetTurnstile();
+    }
+  }
+
+  const isLoading = formState.status === 'loading';
+  const helperColor = formState.status === 'success' ? '#166534' : formState.status === 'error' ? '#B91C1C' : '#6B7280';
+
+  return (
+    <section id="contacto" style={{ padding: '60px 20px 64px', background: '#F4F7F8', borderTop: '1px solid #DDE7EA' }}>
+      <div className="section-inner">
+        <div className="contact-grid">
+          <div style={{
+            background: '#0A4A6E',
+            color: '#fff',
+            padding: '34px 28px',
+            borderRadius: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            gap: 32,
+            minHeight: 420
+          }}>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.70)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
+                Contacto directo
+              </p>
+              <h2 style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.12, margin: '0 0 16px', maxWidth: 520 }}>
+                Dejanos tu correo y cuentanos que necesita tu watermaker.
+              </h2>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.78)', margin: 0, maxWidth: 560 }}>
+                Respondemos solicitudes de servicio, refacciones e instalacion en La Paz y Baja California Sur. Si estas en marina, tambien podemos coordinar una visita a bordo.
+              </p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', margin: '18px 0 0', fontWeight: 700 }}>
+                Respondemos normalmente el mismo dia habil.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gap: 14 }}>
+              <a href="tel:+526121400253" className="focus-ring"
+                style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff', textDecoration: 'none', fontSize: 14 }}>
+                <Icon name="phone" size={18} />+52 (612) 140-0253
+              </a>
+              <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer" className="focus-ring"
+                style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#fff', textDecoration: 'none', fontSize: 14, lineHeight: 1.5 }}>
+                <span style={{ marginTop: 2 }}><Icon name="mapPin" size={18} /></span>
+                Mariano Abasolo #2865, col. 5 de Febrero<br />La Paz, B.C.S.
+              </a>
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="focus-ring"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 9,
+                  width: 'fit-content',
+                  padding: '12px 18px',
+                  borderRadius: 8,
+                  background: '#25D366',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: 14,
+                  textDecoration: 'none'
+                }}>
+                <Icon name="wa" size={18} />WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} style={{
+            background: '#fff',
+            border: '1px solid #DDE7EA',
+            borderRadius: 8,
+            padding: '28px',
+            boxShadow: '0 18px 50px rgba(10,74,110,0.10)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 18
+          }}>
+            <div>
+              <label htmlFor="contact-email" style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0C0A09', marginBottom: 8 }}>
+                Correo electronico
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="email"
+                required
+                disabled={isLoading}
+                placeholder="tu@email.com"
+                style={{
+                  width: '100%',
+                  minHeight: 48,
+                  border: '1px solid #D1D5DB',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  font: 'inherit',
+                  color: '#0C0A09',
+                  outlineColor: accent,
+                  background: isLoading ? '#F9FAFB' : '#fff'
+                }} />
+            </div>
+
+            <div>
+              <label htmlFor="contact-message" style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0C0A09', marginBottom: 8 }}>
+                Mensaje
+              </label>
+              <textarea
+                id="contact-message"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                required
+                disabled={isLoading}
+                rows={6}
+                maxLength={1500}
+                placeholder="Marca, modelo, ubicacion o que problema estas viendo."
+                style={{
+                  width: '100%',
+                  minHeight: 148,
+                  resize: 'vertical',
+                  border: '1px solid #D1D5DB',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  font: 'inherit',
+                  color: '#0C0A09',
+                  lineHeight: 1.55,
+                  outlineColor: accent,
+                  background: isLoading ? '#F9FAFB' : '#fff'
+                }} />
+              <p style={{ fontSize: 12, color: '#6B7280', margin: '7px 0 0', textAlign: 'right' }}>{message.length}/1500</p>
+            </div>
+
+            <div ref={turnstileRef} style={{ minHeight: 65, display: 'flex', alignItems: 'center' }}>
+              {configStatus === 'loading' && <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>Preparando verificacion...</p>}
+              {configStatus !== 'loading' && configStatus !== 'ready' &&
+                <p style={{ fontSize: 13, color: '#B91C1C', margin: 0 }}>Verificacion no disponible.</p>
+              }
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="focus-ring"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+                minHeight: 50,
+                border: 'none',
+                borderRadius: 8,
+                background: isLoading ? '#6B7280' : accent,
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 15,
+                cursor: isLoading ? 'wait' : 'pointer'
+              }}>
+              {isLoading ? 'Enviando...' : 'Enviar mensaje'}
+            </button>
+
+            {formState.message &&
+              <p role="status" style={{ fontSize: 13, lineHeight: 1.5, color: helperColor, margin: 0, fontWeight: 600 }}>
+                {formState.message}
+              </p>
+            }
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [tweaksVisible, setTweaksVisible] = useState(false);
   const [tweaks, setTweaks] = useState(/*EDITMODE-BEGIN*/{
@@ -724,19 +1035,13 @@ function App() {
             </details>
           ))}
 
-          <div style={{ textAlign: 'center', marginTop: 24 }}>
-            <p style={{ fontSize: 14, color: '#6B7280', margin: '0 0 12px' }}>¿Tu pregunta no está aquí?</p>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}>
-              <Icon name="wa" size={16} />
-              Pregúntanos por WhatsApp
-            </a>
-          </div>
         </div>
       </section>
 
       {/* ── FOOTER ─────────────────────────────── */}
-      <footer id="contacto" style={{ padding: '48px 20px 36px', background: "rgb(10, 74, 110)", color: "rgb(255, 255, 255)" }}>
+      <ContactSection accent={ac} />
+
+      <footer style={{ padding: '48px 20px 36px', background: "rgb(10, 74, 110)", color: "rgb(255, 255, 255)" }}>
         <div className="section-inner">
           <div className="footer-grid">
 
@@ -796,18 +1101,7 @@ function App() {
                   <Icon name={l.icon} size={15} />{l.label}
                 </a>
               )}
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 8,
-                background: '#25D366', color: '#fff', borderRadius: 8, padding: '11px 16px',
-                fontWeight: 600, fontSize: 14, textDecoration: 'none', transition: 'background 0.15s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.background = '#1da851'}
-              onMouseLeave={(e) => e.currentTarget.style.background = '#25D366'}>
-                
-                <Icon name="wa" size={18} />WhatsApp
-              </a>
-              <p style={{ fontSize: 12, color: '#fff', marginTop: 10, textAlign: 'center' }}>
+              <p style={{ fontSize: 12, color: '#fff', marginTop: 10 }}>
                 🇺🇸 We speak English
               </p>
             </div>
