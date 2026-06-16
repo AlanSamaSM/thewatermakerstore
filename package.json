@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "build": "bunx --package esbuild ./app.jsx --bundle --outfile=./app.js --target=es2018 --format=iife --minify --jsx-factory=React.createElement --jsx-fragment=React.Fragment --legal-comments=none",
-    "preview": "bunx --package wrangler wrangler pages dev .",
-    "preview:port": "bunx --package wrangler wrangler pages dev . --port 8788"
+    "build": "node scripts/build-pages.mjs",
+    "build:app": "bunx --package esbuild ./app.jsx --bundle --outfile=./app.js --target=es2018 --format=iife --minify --jsx-factory=React.createElement --jsx-fragment=React.Fragment --legal-comments=none",
+    "preview": "bun run build && bunx --package wrangler wrangler pages dev dist",
+    "preview:port": "bun run build && bunx --package wrangler wrangler pages dev dist --port 8788",
+    "deploy": "bun run build && bunx --package wrangler wrangler pages deploy dist"
   }
 }

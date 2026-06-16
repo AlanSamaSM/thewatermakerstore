@@ -38,6 +38,16 @@ TURNSTILE_SECRET_KEY=
 
 After saving them, redeploy the project.
 
+Recommended build settings for Cloudflare Pages:
+
+```txt
+Build command: bun run build
+Build output directory: dist
+Functions directory: functions
+```
+
+Do not use the repository root (`.`) as the output directory. During Cloudflare builds, tooling can create `node_modules/`, and publishing the root can try to upload build tools as public assets.
+
 ## 4. Local test
 
 1. Copy `.dev.vars.example` to `.dev.vars`.
@@ -66,4 +76,3 @@ This starts a local Cloudflare Pages environment with the `functions/` folder ac
 - The public Turnstile site key endpoint is in `functions/api/contact-config.js`.
 - Resend requires `CONTACT_FROM_EMAIL` to use a verified sender/domain.
 - If the form says it is not configured, one or more environment variables are missing.
-
