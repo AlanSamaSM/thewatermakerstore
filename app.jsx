@@ -22,18 +22,262 @@ const SERVICES = [
 { icon: 'factory', title: 'Industrial', desc: 'Plantas de ósmosis inversa de alto volumen para hoteles y empresas.' }];
 
 
-// Fallback posts used on first paint and if /content/posts.json fails to load.
-// Real posts live in content/posts.json and are edited via the Decap CMS at /admin/.
-const BLOG_POSTS = [
-{ img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80', alt: 'Velero en marina de La Paz', tag: 'Mantenimiento', date: '12 abr 2025', title: '¿Cada cuánto debes cambiar las membranas de tu watermaker?' },
-{ img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', alt: 'Sistema de ósmosis inversa', tag: 'Guía técnica', date: '28 mar 2025', title: 'Los 5 síntomas que indican que tu desalador necesita servicio urgente' },
-{ img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80', alt: 'Yate en el Mar de Cortés', tag: 'Temporada', date: '10 mar 2025', title: 'Prepara tu watermaker para la temporada de cruceros en La Paz' }];
-
-
 const WA_NUMBER = '526121400253';
 const WA_MESSAGE = encodeURIComponent('Hola, necesito ayuda con mi watermaker.');
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
+const MAPS_LINK = 'https://maps.app.goo.gl/EPvF11c8RnEtGdNq5';
 const ACCENT = '#0A4A6E';
+
+const I18N = {
+  en: {
+    langCode: 'en',
+    langLabel: 'ES',
+    nav: [
+      ['#servicios', 'Services'],
+      ['#contacto', 'Contact'],
+      ['#faq', 'FAQ']
+    ],
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    hero: {
+      title: <>The water you need,<br />when you need it most.</>,
+      subtitle: 'Service, parts, and installation for watermakers on yachts, homes, and industrial systems in Baja California Sur.',
+      contact: 'Contact now',
+      services: 'View services',
+      contactAria: 'Go to the contact section'
+    },
+    stats: [
+      { value: 15, suffix: '+', label: 'Years of experience' },
+      { value: 8, label: 'Authorized brands' },
+      { value: 100, suffix: '+', label: 'Boats served' }
+    ],
+    logoStrip: 'Brands we distribute and service',
+    services: {
+      eyebrow: 'Services',
+      title: 'How can we help?',
+      subtitle: 'We serve marine, residential, and industrial systems across Baja California Sur.',
+      items: [
+        { icon: 'anchor', title: 'Marine', desc: 'Yachts, sailboats, and vessels of any size. Marina visits included.' },
+        { icon: 'home', title: 'Residential', desc: 'Installation and maintenance for homes and communities in BCS.' },
+        { icon: 'factory', title: 'Industrial', desc: 'High-volume reverse osmosis plants for hotels and businesses.' }
+      ]
+    },
+    parts: {
+      eyebrow: 'Parts',
+      title: <>Parts in stock.<br />No waiting.</>,
+      body: 'We keep the largest local inventory of watermaker parts in Baja California Sur, including membranes, pumps, filters, valves, seals, and more. If you need it today, we probably have it today.',
+      cta: 'Check availability',
+      imageAlt: 'Watermaker parts inventory at The Watermaker Store'
+    },
+    marine: {
+      eyebrow: 'Marine service',
+      title: 'We come to your vessel.',
+      body: 'Visits to Marina de La Paz, Marina Palmira, and Puerto Escondido. On-board diagnostics and repairs without moving your yacht.',
+      cta: 'Schedule visit',
+      imageAlt: 'The Watermaker Store technician servicing a boat at the marina'
+    },
+    beforeAfter: {
+      eyebrow: 'Diagnostics and repair',
+      beforeTitle: 'Does your system look like this?',
+      afterTitle: 'Ready to go back to work.',
+      beforeBody: 'Do not worry. We have seen worse.',
+      afterBody: 'Clean, calibrated, and ready for more hours.',
+      tap: 'Tap to see the result',
+      beforeBadge: 'BEFORE',
+      afterBadge: 'AFTER',
+      showBefore: 'View before',
+      cta: 'I need this service',
+      beforeAlt: 'Watermaker pump before service',
+      afterAlt: 'Watermaker pump after service'
+    },
+    location: {
+      eyebrow: 'Where to find us',
+      title: 'Visit us in La Paz',
+      note: 'We speak English',
+      hours: 'Mon-Sat · 9:00-18:00',
+      mapCta: 'Open in Google Maps',
+      iframeTitle: 'The Watermaker Store location'
+    },
+    faq: {
+      eyebrow: 'Frequently asked questions',
+      title: 'What clients ask most',
+      items: [
+        { q: 'Which watermaker brands do you service?', a: 'We are an authorized service center for Spectra Watermakers, Sea Recovery, Schenker, Village Marine, Parker, HRO, Katadyn, Idronautica, Pentair, Cruise RO, FilmTec, Cat Pumps, General Pump, March Pumps, and WEG. If your brand is not listed, contact us. We can usually help.' },
+        { q: 'Do you service boats outside La Paz?', a: 'Yes. We visit Marina de La Paz, Marina Palmira, Puerto Escondido, and projects across Baja California Sur. For remote locations, we coordinate logistics by WhatsApp.' },
+        { q: 'How long does a typical service take?', a: 'Diagnostics are usually same day. Minor repairs usually take 1-2 days. Full overhauls usually take 3-5 days, depending on parts availability.' },
+        { q: 'Do you keep parts in stock?', a: 'Yes. We keep a strong local inventory of membranes, pumps, filters, valves, seals, and more. If we do not have it, we source it through our manufacturer network.' },
+        { q: 'How much does membrane replacement cost?', a: 'The cost depends on your watermaker model and membrane size. Send us the brand and model, or a photo of the plate, and we can quote accurately.' },
+        { q: 'Do you service industrial and residential systems?', a: 'Yes. We install and maintain reverse osmosis systems for hotels, residential developments, ranches, and businesses across BCS, in addition to marine service.' },
+        { q: 'Do you speak English?', a: 'Yes, we speak English fluently. We welcome cruisers and international clients, and have served boats from the US, Canada, and Europe for more than 15 years.' }
+      ]
+    },
+    contact: {
+      eyebrow: 'Direct contact',
+      title: 'Leave your email and tell us what your watermaker needs.',
+      body: 'We respond to service, parts, and installation requests in La Paz and Baja California Sur. If you are at a marina, we can also coordinate an on-board visit.',
+      trust: 'We usually respond the same business day.',
+      email: 'Email',
+      phone: 'Phone number (optional)',
+      message: 'Message',
+      emailPlaceholder: 'you@email.com',
+      phonePlaceholder: '+1 555 000 0000',
+      messagePlaceholder: 'Brand, model, location, or what problem you are seeing.',
+      preparing: 'Preparing verification...',
+      verificationMissing: 'Verification unavailable.',
+      submit: 'Send message',
+      sending: 'Sending...',
+      success: 'Message sent. We will reply soon.',
+      validationEmail: 'Enter a valid email so we can reply.',
+      validationPhone: 'Keep the phone number under 40 characters.',
+      validationMessageShort: 'Tell us a little more so we can guide you well.',
+      validationMessageLong: 'The message is too long. Keep it under 1500 characters.',
+      validationConfig: 'The form is not configured yet. Contact us by WhatsApp.',
+      validationTurnstile: 'Complete the verification to send the message.',
+      turnstileError: 'We could not verify the form. Please try again.',
+      configError: 'We could not prepare the form. Use WhatsApp while we review it.',
+      serverFallback: 'We could not send your message. Try WhatsApp.'
+    },
+    footer: {
+      blurb: '"Trust in every drop" - The authorized service center for leading watermaker brands in Baja California Sur.',
+      services: 'Services',
+      find: 'Find us',
+      website: 'Website',
+      speaks: 'We speak English',
+      rights: 'All rights reserved.',
+      place: 'La Paz, Baja California Sur, Mexico',
+      serviceList: ['Marine & Nautical', 'Residential', 'Industrial', 'Parts', 'Installation', 'Diagnostics']
+    },
+    tweaks: {
+      close: 'Close',
+      accent: 'Accent color'
+    },
+    whatsappAria: 'Contact us by WhatsApp'
+  },
+  es: {
+    langCode: 'es',
+    langLabel: 'EN',
+    nav: [
+      ['#servicios', 'Servicios'],
+      ['#contacto', 'Contacto'],
+      ['#faq', 'FAQ']
+    ],
+    menuOpen: 'Abrir menu',
+    menuClose: 'Cerrar menu',
+    hero: {
+      title: <>El agua que necesitas,<br />cuando mas la necesitas.</>,
+      subtitle: 'Servicio, refacciones e instalacion de desaladores para yates, hogares e industria en Baja California Sur.',
+      contact: 'Contactar ahora',
+      services: 'Ver servicios',
+      contactAria: 'Ir a la seccion de contacto'
+    },
+    stats: [
+      { value: 15, suffix: '+', label: 'Anios de experiencia' },
+      { value: 8, label: 'Marcas autorizadas' },
+      { value: 100, suffix: '+', label: 'Embarcaciones atendidas' }
+    ],
+    logoStrip: 'Marcas que distribuimos y serviciamos',
+    services: {
+      eyebrow: 'Servicios',
+      title: 'En que podemos ayudarte?',
+      subtitle: 'Atendemos marino, residencial e industrial en toda Baja California Sur.',
+      items: [
+        { icon: 'anchor', title: 'Marino', desc: 'Yates, veleros y embarcaciones de cualquier eslora. Salidas a marina incluidas.' },
+        { icon: 'home', title: 'Residencial', desc: 'Instalacion y mantenimiento para casas y comunidades en BCS.' },
+        { icon: 'factory', title: 'Industrial', desc: 'Plantas de osmosis inversa de alto volumen para hoteles y empresas.' }
+      ]
+    },
+    parts: {
+      eyebrow: 'Refacciones',
+      title: <>Partes en inventario.<br />Sin esperas.</>,
+      body: 'Contamos con el mayor inventario local de refacciones para desaladores en Baja California Sur: membranas, bombas, filtros, valvulas, sellos y mas. Si lo necesitas hoy, probablemente lo tenemos hoy.',
+      cta: 'Consultar disponibilidad',
+      imageAlt: 'Inventario de refacciones para desaladores en The Watermaker Store'
+    },
+    marine: {
+      eyebrow: 'Servicio marino',
+      title: 'Vamos hasta tu embarcacion.',
+      body: 'Salidas a Marina de La Paz, Marina Palmira y Puerto Escondido. Diagnostico y reparacion a bordo, sin mover tu yate.',
+      cta: 'Agendar visita',
+      imageAlt: 'Tecnico de The Watermaker Store dando servicio en marina'
+    },
+    beforeAfter: {
+      eyebrow: 'Diagnostico y reparacion',
+      beforeTitle: 'Tu equipo se ve asi?',
+      afterTitle: 'Asi lo devolvemos.',
+      beforeBody: 'No entres en panico. Lo hemos visto peor.',
+      afterBody: 'Limpio, calibrado y listo para mas horas.',
+      tap: 'Toca para ver el resultado',
+      beforeBadge: 'ANTES',
+      afterBadge: 'DESPUES',
+      showBefore: 'Ver antes',
+      cta: 'Quiero este servicio',
+      beforeAlt: 'Bomba de desalador antes del servicio',
+      afterAlt: 'Bomba de desalador despues del servicio'
+    },
+    location: {
+      eyebrow: 'Donde encontrarnos',
+      title: 'Visitanos en La Paz',
+      note: 'Hablamos ingles',
+      hours: 'Lun-Sab · 9:00-18:00 h',
+      mapCta: 'Abrir en Google Maps',
+      iframeTitle: 'Ubicacion The Watermaker Store'
+    },
+    faq: {
+      eyebrow: 'Preguntas frecuentes',
+      title: 'Lo que mas nos preguntan',
+      items: [
+        { q: 'Que marcas de desaladores atienden?', a: 'Somos centro de servicio autorizado para Spectra Watermakers, Sea Recovery, Schenker, Village Marine, Parker, HRO, Katadyn, Idronautica, Pentair, Cruise RO, FilmTec, Cat Pumps, General Pump, March Pumps y WEG. Si tu marca no esta en la lista, contactanos. Casi siempre podemos ayudar.' },
+        { q: 'Atienden fuera de La Paz?', a: 'Si. Hacemos salidas a Marina de La Paz, Marina Palmira, Puerto Escondido y proyectos en todo Baja California Sur. Para ubicaciones lejanas coordinamos logistica por WhatsApp.' },
+        { q: 'Cuanto tarda un servicio tipico?', a: 'El diagnostico normalmente es el mismo dia. Reparaciones menores suelen tomar 1-2 dias. Overhauls completos suelen tomar 3-5 dias, dependiendo de la disponibilidad de refacciones.' },
+        { q: 'Tienen refacciones en stock?', a: 'Si. Tenemos inventario local de membranas, bombas, filtros, valvulas, sellos y mas. Lo que no tenemos, lo conseguimos con nuestra red de fabricantes.' },
+        { q: 'Cuanto cuesta reemplazar una membrana?', a: 'El costo depende del modelo y tamano de tu watermaker. Envia marca y modelo, o una foto de la placa, y podemos cotizar con precision.' },
+        { q: 'Dan servicio a sistemas industriales y residenciales?', a: 'Si. Instalamos y damos mantenimiento a plantas de osmosis inversa para hoteles, desarrollos residenciales, ranchos y empresas en BCS, ademas del servicio marino.' },
+        { q: 'Do you speak English?', a: 'Yes, we speak English fluently. Welcome to all cruisers and international clients.' }
+      ]
+    },
+    contact: {
+      eyebrow: 'Contacto directo',
+      title: 'Dejanos tu correo y cuentanos que necesita tu watermaker.',
+      body: 'Respondemos solicitudes de servicio, refacciones e instalacion en La Paz y Baja California Sur. Si estas en marina, tambien podemos coordinar una visita a bordo.',
+      trust: 'Respondemos normalmente el mismo dia habil.',
+      email: 'Correo electronico',
+      phone: 'Telefono (opcional)',
+      message: 'Mensaje',
+      emailPlaceholder: 'tu@email.com',
+      phonePlaceholder: '+52 612 000 0000',
+      messagePlaceholder: 'Marca, modelo, ubicacion o que problema estas viendo.',
+      preparing: 'Preparando verificacion...',
+      verificationMissing: 'Verificacion no disponible.',
+      submit: 'Enviar mensaje',
+      sending: 'Enviando...',
+      success: 'Mensaje enviado. Te responderemos pronto.',
+      validationEmail: 'Escribe un correo valido para poder responderte.',
+      validationPhone: 'Mantén el telefono en menos de 40 caracteres.',
+      validationMessageShort: 'Cuentanos un poco mas para poder orientarte bien.',
+      validationMessageLong: 'El mensaje es muy largo. Resume la solicitud en menos de 1500 caracteres.',
+      validationConfig: 'El formulario aun no esta configurado. Contactanos por WhatsApp.',
+      validationTurnstile: 'Completa la verificacion para enviar el mensaje.',
+      turnstileError: 'No se pudo verificar el formulario. Intenta otra vez.',
+      configError: 'No pudimos preparar el formulario. Intenta por WhatsApp mientras lo revisamos.',
+      serverFallback: 'No pudimos enviar tu mensaje. Intenta por WhatsApp.'
+    },
+    footer: {
+      blurb: '"Trust in every drop" - El centro de servicio autorizado para las principales marcas de desaladores en Baja California Sur.',
+      services: 'Servicios',
+      find: 'Encuentranos',
+      website: 'Sitio web',
+      speaks: 'Hablamos ingles',
+      rights: 'Todos los derechos reservados.',
+      place: 'La Paz, Baja California Sur, Mexico',
+      serviceList: ['Marino & Nautico', 'Residencial', 'Industrial', 'Refacciones', 'Instalacion', 'Diagnostico']
+    },
+    tweaks: {
+      close: 'Cerrar',
+      accent: 'Color de acento'
+    },
+    whatsappAria: 'Contactanos por WhatsApp'
+  }
+};
 
 /* ─── ICONS ─────────────────────────────────────────── */
 function Icon({ name, size = 20, style: extStyle = {}, className = '' }) {
@@ -68,19 +312,6 @@ function useScrolled(threshold = 10) {
     return () => window.removeEventListener('scroll', fn);
   }, [threshold]);
   return scrolled;
-}
-
-function useBlogPosts() {
-  const [posts, setPosts] = useState(BLOG_POSTS);
-  useEffect(() => {
-    fetch('/content/posts.json', { cache: 'no-cache' })
-      .then(r => r.ok ? r.json() : null)
-      .then(d => {
-        if (d && Array.isArray(d.posts) && d.posts.length) setPosts(d.posts);
-      })
-      .catch(() => { /* keep BLOG_POSTS fallback */ });
-  }, []);
-  return posts;
 }
 
 function AnimatedStat({ value, suffix = '', label }) {
@@ -134,7 +365,35 @@ function AnimatedStat({ value, suffix = '', label }) {
 }
 
 /* ─── NAV ───────────────────────────────────────────── */
-function Nav({ accent }) {
+function LanguageToggle({ language, onToggle, compact = false }) {
+  const nextLabel = language === 'en' ? 'ES' : 'EN';
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className="focus-ring"
+      aria-label={language === 'en' ? 'Switch to Spanish' : 'Cambiar a ingles'}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: compact ? 38 : 34,
+        padding: compact ? '8px 12px' : '7px 11px',
+        borderRadius: 8,
+        border: '1px solid rgba(10,74,110,0.22)',
+        background: '#E0F2FE',
+        color: '#04101E',
+        fontSize: compact ? 13 : 12,
+        fontWeight: 800,
+        letterSpacing: '0.04em',
+        cursor: 'pointer'
+      }}>
+      {nextLabel}
+    </button>
+  );
+}
+
+function Nav({ language, onToggleLanguage, copy }) {
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -170,7 +429,7 @@ function Nav({ accent }) {
 
           {/* Desktop links */}
           <div className="nav-links" style={{ color: scrolled ? '#374151' : 'rgba(255,255,255,0.90)' }}>
-            {[['#servicios', 'Servicios'], ['#faq', 'FAQ'], ['#blog', 'Blog'], ['#contacto', 'Contacto']].map(([href, label]) =>
+            {copy.nav.map(([href, label]) =>
             <a key={label} href={href} className="focus-ring" style={{
               fontSize: 14, fontWeight: 500, textDecoration: 'none',
               color: 'inherit', transition: 'opacity 0.15s'
@@ -179,13 +438,14 @@ function Nav({ accent }) {
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
               {label}</a>
             )}
+            <LanguageToggle language={language} onToggle={onToggleLanguage} />
           </div>
 
           {/* Hamburger — visible only on mobile */}
           <button
             className="mobile-menu-btn"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={menuOpen ? copy.menuClose : copy.menuOpen}
             style={{
               border: 'none', background: 'none', cursor: 'pointer',
               color: scrolled ? '#0C0A09' : '#fff', padding: 4,
@@ -210,13 +470,16 @@ function Nav({ accent }) {
         padding: '8px 18px 14px',
         boxShadow: '0 12px 40px rgba(0,0,0,0.14)'
       }}>
-          {[['#servicios', 'Servicios'], ['#faq', 'FAQ'], ['#blog', 'Blog'], ['#contacto', 'Contacto']].map(([href, label]) =>
+          {copy.nav.map(([href, label]) =>
         <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
           display: 'block', padding: '13px 0',
           borderBottom: '1px solid rgba(0,0,0,0.06)',
           fontSize: 15, fontWeight: 600, textDecoration: 'none', color: '#0C0A09'
         }}>{label}</a>
         )}
+          <div style={{ paddingTop: 12 }}>
+            <LanguageToggle language={language} onToggle={onToggleLanguage} compact />
+          </div>
         </div>
       }
     </>);
@@ -224,7 +487,7 @@ function Nav({ accent }) {
 }
 
 /* ─── HERO ───────────────────────────────────────────── */
-function Hero({ accent }) {
+function Hero({ accent, copy }) {
   return (
     <header style={{ position: 'relative', overflow: 'hidden', minHeight: '100svh', background: '#04101e' }} className="hero-min-h">
       <video
@@ -255,7 +518,7 @@ function Hero({ accent }) {
           letterSpacing: '-0.028em',
           textShadow: '0 2px 28px rgba(0,0,0,0.45)'
         }}>
-          El agua que necesitas,<br />cuando más la necesitas.
+          {copy.hero.title}
         </h1>
 
         {/* Subtitle */}
@@ -264,14 +527,14 @@ function Hero({ accent }) {
           margin: '0 0 38px', fontWeight: 400, lineHeight: 1.55,
           maxWidth: 540
         }}>
-          Servicio, refacciones e instalación de desaladores para yates, hogares e industria en Baja California Sur.
+          {copy.hero.subtitle}
         </p>
 
         {/* CTA group */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'flex-start', alignItems: 'center' }}>
           {/* Primary contact CTA */}
           <a href="#contacto" className="focus-ring"
-            aria-label="Ir a la sección de contacto"
+            aria-label={copy.hero.contactAria}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
               padding: '14px 24px', borderRadius: 10,
@@ -283,7 +546,7 @@ function Hero({ accent }) {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 34px rgba(56,189,248,0.48)'; e.currentTarget.style.background = '#7DD3FC'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(56,189,248,0.34)'; e.currentTarget.style.background = '#38BDF8'; }}>
-            Contactar ahora
+            {copy.hero.contact}
             <Icon name="chevron" size={18} />
           </a>
 
@@ -302,7 +565,7 @@ function Hero({ accent }) {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)'; }}>
-            Ver servicios
+            {copy.hero.services}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           </a>
         </div>
@@ -313,18 +576,18 @@ function Hero({ accent }) {
 }
 
 /* ─── BEFORE / AFTER ───────────────────────────────── */
-function BeforeAfter() {
+function BeforeAfter({ copy }) {
   const [revealed, setRevealed] = useState(false);
   return (
     <section style={{ padding: '56px 20px', background: '#fff', borderTop: '1px solid #E7E5E4' }}>
       <div className="section-inner">
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Diagnóstico y reparación</p>
+          <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{copy.beforeAfter.eyebrow}</p>
           <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: '0 0 10px' }}>
-            {revealed ? '✓ Así lo devolvemos.' : '¿Tu equipo se ve así?'}
+            {revealed ? copy.beforeAfter.afterTitle : copy.beforeAfter.beforeTitle}
           </h2>
           <p style={{ fontSize: 15, color: '#6B7280', margin: 0 }}>
-            {revealed ? 'Limpio, calibrado y listo para otras 10,000 horas.' : 'No entres en pánico — lo hemos visto peor.'}
+            {revealed ? copy.beforeAfter.afterBody : copy.beforeAfter.beforeBody}
           </p>
         </div>
 
@@ -334,7 +597,7 @@ function BeforeAfter() {
           {/* ANTES */}
           <img
             src="uploads/Imagen de WhatsApp 2024-02-10 a las 12.42.08_915f384d.jpg"
-            alt="Bomba de desalador antes del servicio — corroída y desgastada"
+            alt={copy.beforeAfter.beforeAlt}
             className="ba-img"
             loading="lazy"
             decoding="async"
@@ -343,7 +606,7 @@ function BeforeAfter() {
           {/* DESPUÉS */}
           <img
             src="uploads/Imagen de WhatsApp 2024-02-10 a las 14.56.36_511953ba.jpg"
-            alt="Bomba de desalador después del servicio — limpia y restaurada"
+            alt={copy.beforeAfter.afterAlt}
             className="ba-img"
             loading="lazy"
             decoding="async"
@@ -359,7 +622,7 @@ function BeforeAfter() {
             padding: '28px 20px'
           }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 24px', borderRadius: 50, background: '#fff', color: '#0C0A09', fontWeight: 700, fontSize: 15, boxShadow: '0 2px 12px rgba(0,0,0,0.15)', animation: 'pulse-btn 2s ease-in-out infinite' }}>
-                <span>👆</span> Toca para ver el resultado
+                {copy.beforeAfter.tap}
               </div>
             </div>
           }
@@ -372,7 +635,7 @@ function BeforeAfter() {
             color: '#fff', fontSize: 11, fontWeight: 700,
             letterSpacing: '0.04em', transition: 'background 0.5s'
           }}>
-            {revealed ? '✓ DESPUÉS' : 'ANTES'}
+            {revealed ? copy.beforeAfter.afterBadge : copy.beforeAfter.beforeBadge}
           </div>
         </div>
 
@@ -381,12 +644,12 @@ function BeforeAfter() {
             <button
             onClick={() => setRevealed(false)}
             style={{ background: 'none', border: '1px solid #E7E5E4', borderRadius: 8, padding: '8px 18px', fontSize: 13, color: '#6B7280', cursor: 'pointer' }}>
-            ← Ver antes</button>
+            {copy.beforeAfter.showBefore}</button>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginLeft: 12, padding: '9px 18px', borderRadius: 8, background: '#25D366', color: '#fff', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}>
             
               <Icon name="wa" size={16} />
-              Quiero este servicio
+              {copy.beforeAfter.cta}
             </a>
           </div>
         }
@@ -397,70 +660,10 @@ function BeforeAfter() {
 }
 
 /* ─── BLOG CAROUSEL ─────────────────────────────────── */
-function BlogCarousel({ posts, ac }) {
-  const [idx, setIdx] = useState(0);
-  const isDesktop = window.innerWidth >= 768;
-  const visible = isDesktop ? 3 : 1;
-  const max = posts.length - visible;
-
-  const prev = () => setIdx((i) => Math.max(0, i - 1));
-  const next = () => setIdx((i) => Math.min(max, i + 1));
-
-  return (
-    <div style={{ position: 'relative' }}>
-      <div className="blog-carousel">
-        <div className="blog-track" style={{ transform: `translateX(-${idx * (100 / visible)}%)` }}>
-          {posts.map((p, i) =>
-          <div key={i} className="blog-slide">
-              <article style={{
-              background: '#fff', borderRadius: 12,
-              border: '1px solid #E7E5E4', overflow: 'hidden',
-              display: 'flex', flexDirection: 'column',
-              transition: 'box-shadow 0.18s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 4px 18px rgba(0,0,0,0.08)'}
-            onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}>
-              
-                <div style={{ position: 'relative', paddingBottom: '56%', background: '#E7E5E4', overflow: 'hidden' }}>
-                  <img src={p.img} alt={p.alt} loading="lazy"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div style={{ padding: '16px 18px 20px', display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: ac, background: ac + '14', padding: '3px 8px', borderRadius: 4 }}>{p.tag}</span>
-                    <span style={{ fontSize: 11, color: '#9CA3AF' }}>{p.date}</span>
-                  </div>
-                  <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0C0A09', margin: 0, lineHeight: 1.4, flex: 1 }}>{p.title}</h3>
-                  <a href="#" style={{ fontSize: 13, fontWeight: 600, color: ac, textDecoration: 'none', marginTop: 4 }}
-                aria-label={`Leer más: ${p.title}`}>Leer más →</a>
-                </div>
-              </article>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 20 }}>
-        <button onClick={prev} disabled={idx === 0} aria-label="Anterior"
-        style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid #E7E5E4', background: '#fff', cursor: idx === 0 ? 'not-allowed' : 'pointer', opacity: idx === 0 ? 0.4 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#374151', transition: 'opacity 0.15s' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
-        </button>
-        {posts.map((_, i) =>
-        <span key={i} onClick={() => setIdx(Math.min(i, max))} style={{ width: i === idx ? 20 : 7, height: 7, borderRadius: 4, background: i === idx ? ac : '#D1D5DB', cursor: 'pointer', transition: 'width 0.25s, background 0.25s', display: 'inline-block' }} />
-        )}
-        <button onClick={next} disabled={idx >= max} aria-label="Siguiente"
-        style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid #E7E5E4', background: '#fff', cursor: idx >= max ? 'not-allowed' : 'pointer', opacity: idx >= max ? 0.4 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#374151', transition: 'opacity 0.15s' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
-        </button>
-      </div>
-    </div>);
-
-}
-
 /* ─── APP ─────────────────────────────────────────────── */
-function ContactSection({ accent }) {
+function ContactSection({ accent, copy }) {
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [siteKey, setSiteKey] = useState('');
   const [configStatus, setConfigStatus] = useState('loading');
@@ -483,7 +686,7 @@ function ContactSection({ accent }) {
           setConfigStatus('missing');
           setFormState({
             status: 'error',
-            message: 'El formulario aun no esta configurado. Contactanos por WhatsApp.'
+            message: copy.contact.validationConfig
           });
         }
       })
@@ -492,7 +695,7 @@ function ContactSection({ accent }) {
           setConfigStatus('error');
           setFormState({
             status: 'error',
-            message: 'No pudimos preparar el formulario. Intenta por WhatsApp mientras lo revisamos.'
+            message: copy.contact.configError
           });
         }
       });
@@ -510,11 +713,14 @@ function ContactSection({ accent }) {
 
       widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
         sitekey: siteKey,
-        callback: (token) => setTurnstileToken(token),
+        callback: (token) => {
+          setTurnstileToken(token);
+          setFormState((state) => state.status === 'error' ? { status: 'idle', message: '' } : state);
+        },
         'expired-callback': () => setTurnstileToken(''),
         'error-callback': () => {
           setTurnstileToken('');
-          setFormState({ status: 'error', message: 'No se pudo verificar el formulario. Recarga e intenta otra vez.' });
+          setFormState({ status: 'error', message: copy.contact.turnstileError });
         }
       });
     }
@@ -554,15 +760,21 @@ function ContactSection({ accent }) {
 
   function validateForm() {
     const cleanEmail = email.trim();
+    const cleanPhone = phone.trim();
     const cleanMessage = message.trim();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(cleanEmail)) return 'Escribe un correo valido para poder responderte.';
-    if (cleanMessage.length < 10) return 'Cuentanos un poco mas para poder orientarte bien.';
-    if (cleanMessage.length > 1500) return 'El mensaje es muy largo. Resume la solicitud en menos de 1500 caracteres.';
-    if (configStatus !== 'ready') return 'El formulario aun no esta configurado. Contactanos por WhatsApp.';
-    if (!turnstileToken) return 'Completa la verificacion para enviar el mensaje.';
+    if (!emailPattern.test(cleanEmail)) return copy.contact.validationEmail;
+    if (cleanPhone.length > 40) return copy.contact.validationPhone;
+    if (cleanMessage.length < 10) return copy.contact.validationMessageShort;
+    if (cleanMessage.length > 1500) return copy.contact.validationMessageLong;
+    if (configStatus !== 'ready') return copy.contact.validationConfig;
+    if (!turnstileToken) return copy.contact.validationTurnstile;
     return '';
+  }
+
+  function clearErrorOnEdit() {
+    if (formState.status === 'error') setFormState({ status: 'idle', message: '' });
   }
 
   async function handleSubmit(event) {
@@ -574,7 +786,7 @@ function ContactSection({ accent }) {
       return;
     }
 
-    setFormState({ status: 'loading', message: 'Enviando mensaje...' });
+    setFormState({ status: 'loading', message: copy.contact.sending });
 
     try {
       const response = await fetch('/api/contact', {
@@ -582,6 +794,7 @@ function ContactSection({ accent }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email.trim(),
+          phone: phone.trim(),
           message: message.trim(),
           turnstileToken
         })
@@ -589,15 +802,16 @@ function ContactSection({ accent }) {
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok || !result.ok) {
-        throw new Error(result.error || 'No pudimos enviar tu mensaje. Intenta nuevamente.');
+        throw new Error(result.error || copy.contact.serverFallback);
       }
 
       setEmail('');
+      setPhone('');
       setMessage('');
-      setFormState({ status: 'success', message: 'Mensaje enviado. Te responderemos pronto.' });
+      setFormState({ status: 'success', message: copy.contact.success });
       resetTurnstile();
     } catch (err) {
-      setFormState({ status: 'error', message: err.message || 'No pudimos enviar tu mensaje. Intenta por WhatsApp.' });
+      setFormState({ status: 'error', message: err.message || copy.contact.serverFallback });
       resetTurnstile();
     }
   }
@@ -622,16 +836,16 @@ function ContactSection({ accent }) {
           }}>
             <div>
               <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.70)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
-                Contacto directo
+                {copy.contact.eyebrow}
               </p>
               <h2 style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.12, margin: '0 0 16px', maxWidth: 520 }}>
-                Dejanos tu correo y cuentanos que necesita tu watermaker.
+                {copy.contact.title}
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.78)', margin: 0, maxWidth: 560 }}>
-                Respondemos solicitudes de servicio, refacciones e instalacion en La Paz y Baja California Sur. Si estas en marina, tambien podemos coordinar una visita a bordo.
+                {copy.contact.body}
               </p>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.82)', margin: '18px 0 0', fontWeight: 700 }}>
-                Respondemos normalmente el mismo dia habil.
+                {copy.contact.trust}
               </p>
             </div>
 
@@ -640,7 +854,7 @@ function ContactSection({ accent }) {
                 style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff', textDecoration: 'none', fontSize: 14 }}>
                 <Icon name="phone" size={18} />+52 (612) 140-0253
               </a>
-              <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer" className="focus-ring"
+              <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer" className="focus-ring"
                 style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#fff', textDecoration: 'none', fontSize: 14, lineHeight: 1.5 }}>
                 <span style={{ marginTop: 2 }}><Icon name="mapPin" size={18} /></span>
                 Mariano Abasolo #2865, col. 5 de Febrero<br />La Paz, B.C.S.
@@ -677,17 +891,43 @@ function ContactSection({ accent }) {
           }}>
             <div>
               <label htmlFor="contact-email" style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0C0A09', marginBottom: 8 }}>
-                Correo electronico
+                {copy.contact.email}
               </label>
               <input
                 id="contact-email"
                 type="email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => { setEmail(event.target.value); clearErrorOnEdit(); }}
                 autoComplete="email"
                 required
                 disabled={isLoading}
-                placeholder="tu@email.com"
+                placeholder={copy.contact.emailPlaceholder}
+                style={{
+                  width: '100%',
+                  minHeight: 48,
+                  border: '1px solid #D1D5DB',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  font: 'inherit',
+                  color: '#0C0A09',
+                  outlineColor: accent,
+                  background: isLoading ? '#F9FAFB' : '#fff'
+                }} />
+            </div>
+
+            <div>
+              <label htmlFor="contact-phone" style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0C0A09', marginBottom: 8 }}>
+                {copy.contact.phone}
+              </label>
+              <input
+                id="contact-phone"
+                type="tel"
+                value={phone}
+                onChange={(event) => { setPhone(event.target.value); clearErrorOnEdit(); }}
+                autoComplete="tel"
+                disabled={isLoading}
+                placeholder={copy.contact.phonePlaceholder}
+                maxLength={40}
                 style={{
                   width: '100%',
                   minHeight: 48,
@@ -703,17 +943,17 @@ function ContactSection({ accent }) {
 
             <div>
               <label htmlFor="contact-message" style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0C0A09', marginBottom: 8 }}>
-                Mensaje
+                {copy.contact.message}
               </label>
               <textarea
                 id="contact-message"
                 value={message}
-                onChange={(event) => setMessage(event.target.value)}
+                onChange={(event) => { setMessage(event.target.value); clearErrorOnEdit(); }}
                 required
                 disabled={isLoading}
                 rows={6}
                 maxLength={1500}
-                placeholder="Marca, modelo, ubicacion o que problema estas viendo."
+                placeholder={copy.contact.messagePlaceholder}
                 style={{
                   width: '100%',
                   minHeight: 148,
@@ -731,9 +971,9 @@ function ContactSection({ accent }) {
             </div>
 
             <div ref={turnstileRef} style={{ minHeight: 65, display: 'flex', alignItems: 'center' }}>
-              {configStatus === 'loading' && <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>Preparando verificacion...</p>}
+              {configStatus === 'loading' && <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>{copy.contact.preparing}</p>}
               {configStatus !== 'loading' && configStatus !== 'ready' &&
-                <p style={{ fontSize: 13, color: '#B91C1C', margin: 0 }}>Verificacion no disponible.</p>
+                <p style={{ fontSize: 13, color: '#B91C1C', margin: 0 }}>{copy.contact.verificationMissing}</p>
               }
             </div>
 
@@ -755,7 +995,7 @@ function ContactSection({ accent }) {
                 fontSize: 15,
                 cursor: isLoading ? 'wait' : 'pointer'
               }}>
-              {isLoading ? 'Enviando...' : 'Enviar mensaje'}
+              {isLoading ? copy.contact.sending : copy.contact.submit}
             </button>
 
             {formState.message &&
@@ -772,9 +1012,15 @@ function ContactSection({ accent }) {
 
 function App() {
   const [tweaksVisible, setTweaksVisible] = useState(false);
+  const [language, setLanguage] = useState(() => {
+    try {
+      return localStorage.getItem('site-language') === 'es' ? 'es' : 'en';
+    } catch {
+      return 'en';
+    }
+  });
   const [tweaks, setTweaks] = useState(/*EDITMODE-BEGIN*/{
-    "accentColor": "#0A4A6E",
-    "showBlog": true
+    "accentColor": "#0A4A6E"
   } /*EDITMODE-END*/);
 
   useEffect(() => {
@@ -787,6 +1033,15 @@ function App() {
     return () => window.removeEventListener('message', handler);
   }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('site-language', language);
+    } catch {
+      /* localStorage can be unavailable in restricted contexts. */
+    }
+    document.documentElement.lang = language;
+  }, [language]);
+
   function setTweak(key, val) {
     const next = { ...tweaks, [key]: val };
     setTweaks(next);
@@ -794,21 +1049,18 @@ function App() {
   }
 
   const ac = tweaks.accentColor;
-  const posts = useBlogPosts();
-  const stats = [
-    { value: 15, suffix: '+', label: 'Años de experiencia' },
-    { value: 8, label: 'Marcas autorizadas' },
-    { value: 100, suffix: '+', label: 'Embarcaciones atendidas' }
-  ];
+  const copy = I18N[language];
+  const stats = copy.stats;
+  const toggleLanguage = () => setLanguage((current) => current === 'en' ? 'es' : 'en');
 
   return (
     <div style={{ background: '#FAFAF9', minHeight: '100vh' }}>
 
       {/* ── NAV ──────────────────────────────────── */}
-      <Nav accent={ac} />
+      <Nav language={language} onToggleLanguage={toggleLanguage} copy={copy} />
 
       {/* ── HERO ─────────────────────────────────── */}
-      <Hero accent={ac} />
+      <Hero accent={ac} copy={copy} />
 
       {/* ── STATS STRIP ─────────────────────────── */}
       <div style={{ background: '#fff', borderBottom: '1px solid #E7E5E4' }}>
@@ -824,7 +1076,7 @@ function App() {
       {/* ── LOGO CAROUSEL ────────────────────── */}
       <section style={{ borderTop: '1px solid #E7E5E4', borderBottom: '1px solid #E7E5E4', padding: '28px 0', background: '#fff' }}>
         <p style={{ fontSize: 11, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.09em', textAlign: 'center', marginBottom: 20 }}>
-          Marcas que distribuimos y serviciamos
+          {copy.logoStrip}
         </p>
         <div className="logo-strip">
           <div className="logo-track">
@@ -849,13 +1101,13 @@ function App() {
       <section id="servicios" style={{ padding: '48px 20px' }}>
         <div className="section-inner">
           <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', marginBottom: 6, textAlign: 'center' }}>
-            ¿En qué podemos ayudarte?
+            {copy.services.title}
           </h2>
           <p style={{ fontSize: 14, color: '#6B7280', textAlign: 'center', marginBottom: 24, marginTop: 0 }}>
-            Atendemos marino, residencial e industrial en toda Baja California Sur.
+            {copy.services.subtitle}
           </p>
           <div className="services-grid">
-            {SERVICES.map((s) =>
+            {copy.services.items.map((s) =>
             <div key={s.title} style={{
               padding: '22px 18px', borderRadius: 12,
               border: '1px solid #E7E5E4', background: '#fff',
@@ -881,12 +1133,12 @@ function App() {
         <div className="section-inner">
           <div className="refacciones-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 32, alignItems: 'center' }}>
             <div>
-              <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Refacciones</p>
+              <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{copy.parts.eyebrow}</p>
               <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: '0 0 14px', lineHeight: 1.2 }}>
-                Partes en inventario.<br />Sin esperas.
+                {copy.parts.title}
               </h2>
               <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.65, margin: '0 0 24px' }}>
-                Contamos con el mayor inventario de refacciones para desaladores en Baja California Sur — membranas, bombas, filtros, válvulas y más. Si lo necesitas hoy, lo tenemos hoy.
+                {copy.parts.body}
               </p>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', borderRadius: 8, background: '#0A4A6E', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none', transition: 'background 0.15s' }}
@@ -894,13 +1146,13 @@ function App() {
               onMouseLeave={(e) => e.currentTarget.style.background = '#0A4A6E'}>
                 
                 <Icon name="phone" size={16} />
-                Consultar disponibilidad
+                {copy.parts.cta}
               </a>
             </div>
             <div style={{ borderRadius: 14, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.10)' }}>
               <img
                 src="uploads/Imagen de WhatsApp 2024-03-01 a las 13.38.37_be16fee0.jpg"
-                alt="Inventario de refacciones para desaladores en The Watermaker Store"
+                alt={copy.parts.imageAlt}
                 loading="lazy"
                 decoding="async"
                 style={{ width: '100%', height: 320, objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
@@ -914,7 +1166,7 @@ function App() {
       <section style={{ position: 'relative', overflow: 'hidden', minHeight: 360 }}>
         <img
           src="uploads/hero-residential.webp"
-          alt="Técnico de The Watermaker Store dando servicio en marina"
+          alt={copy.marine.imageAlt}
           loading="lazy"
           decoding="async"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
@@ -922,12 +1174,12 @@ function App() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4,14,28,0.85) 0%, rgba(4,14,28,0.40) 60%, rgba(4,14,28,0.10) 100%)' }} />
         <div className="section-inner" style={{ position: 'relative', zIndex: 1, padding: '64px 24px' }}>
           <div style={{ maxWidth: 420 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>Servicio marino</p>
+            <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>{copy.marine.eyebrow}</p>
             <h2 style={{ fontSize: 28, fontWeight: 700, color: '#fff', margin: '0 0 14px', lineHeight: 1.2 }}>
-              Vamos hasta tu embarcación.
+              {copy.marine.title}
             </h2>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: '0 0 28px' }}>
-              Salidas a Marina de La Paz, Marina Palmira y Puerto Escondido. Diagnóstico y reparación a bordo, sin mover tu yate.
+              {copy.marine.body}
             </p>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
             style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '13px 22px', borderRadius: 9, background: 'rgba(37,211,102,0.18)', border: '1.5px solid rgba(37,211,102,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontWeight: 700, fontSize: 15, textDecoration: 'none', transition: 'background 0.2s' }}
@@ -935,14 +1187,14 @@ function App() {
             onMouseLeave={(e) => {e.currentTarget.style.background = 'rgba(37,211,102,0.18)';}}>
               
               <Icon name="wa" size={20} />
-              Agendar visita
+              {copy.marine.cta}
             </a>
           </div>
         </div>
       </section>
 
       {/* ── ANTES / DESPUÉS ─────────────────────── */}
-      <BeforeAfter />
+      <BeforeAfter copy={copy} />
 
 
       {/* ── UBICACIÓN ────────────────────────── */}
@@ -953,12 +1205,12 @@ function App() {
             {/* Info card */}
             <div style={{ padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: 18, justifyContent: 'center' }}>
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Dónde encontrarnos</p>
-                <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', margin: '0 0 6px' }}>Visítanos en La Paz</h2>
-                <p style={{ fontSize: 14, color: '#6B7280', margin: 0 }}>We speak English 🇺🇸</p>
+                <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{copy.location.eyebrow}</p>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', margin: '0 0 6px' }}>{copy.location.title}</h2>
+                <p style={{ fontSize: 14, color: '#6B7280', margin: 0 }}>{copy.location.note}</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer"
+                <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer"
                   style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#374151', textDecoration: 'none', fontSize: 14, lineHeight: 1.5 }}>
                   <span style={{ marginTop: 2, color: '#0A4A6E', flexShrink: 0 }}><Icon name="mapPin" size={18} /></span>
                   <span>Mariano Abasolo #2865, col. 5 de Febrero<br />23060 La Paz, B.C.S., México</span>
@@ -970,23 +1222,23 @@ function App() {
                 </a>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#374151' }}>
                   <span style={{ color: '#0A4A6E', flexShrink: 0 }}><Icon name="clock" size={18} /></span>
-                  Lun–Sáb · 9:00 – 18:00 h
+                  {copy.location.hours}
                 </div>
               </div>
-              <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer"
+              <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 20px', borderRadius: 8, background: '#0A4A6E', color: '#fff', fontWeight: 600, fontSize: 14, textDecoration: 'none', alignSelf: 'flex-start', transition: 'background 0.15s' }}
                 onMouseEnter={e => e.currentTarget.style.background='#083A56'}
                 onMouseLeave={e => e.currentTarget.style.background='#0A4A6E'}
               >
                 <Icon name="mapPin" size={16} />
-                Abrir en Google Maps
+                {copy.location.mapCta}
               </a>
             </div>
 
             {/* Map iframe */}
             <div style={{ minHeight: 320, background: '#E7E5E4' }}>
               <iframe
-                title="Ubicación The Watermaker Store"
+                title={copy.location.iframeTitle}
                 src="https://maps.google.com/maps?q=Mariano+Abasolo+2865,+La+Paz,+Baja+California+Sur,+Mexico&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%" height="100%"
                 style={{ border: 0, minHeight: 320, display: 'block' }}
@@ -1000,35 +1252,17 @@ function App() {
       </section>
 
             {/* ── BLOG ─────────────────────────────────── */}
-      {tweaks.showBlog &&
-      <section id="blog" style={{ background: '#F9FAFB', borderTop: '1px solid #E7E5E4', padding: '48px 20px 56px' }}>
-          <div className="section-inner">
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0C0A09', marginBottom: 6 }}>Últimos artículos</h2>
-            <p style={{ fontSize: 14, color: '#6B7280', marginBottom: 28, marginTop: 0 }}>
-              Consejos técnicos de Eduardo y el equipo de The Watermaker Store.
-            </p>
-            <BlogCarousel posts={posts} ac={ac} />
-          </div>
-        </section>
-      }
+      <ContactSection accent={ac} copy={copy} />
 
       {/* ── FAQ ──────────────────────────────────── */}
       <section id="faq" style={{ padding: '48px 20px 56px', background: '#fff', borderTop: '1px solid #E7E5E4' }}>
         <div className="section-inner" style={{ maxWidth: 760 }}>
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Preguntas frecuentes</p>
-            <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: 0 }}>Lo que más nos preguntan</h2>
+            <p style={{ fontSize: 11, fontWeight: 700, color: '#0A4A6E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>{copy.faq.eyebrow}</p>
+            <h2 style={{ fontSize: 26, fontWeight: 700, color: '#0C0A09', margin: 0 }}>{copy.faq.title}</h2>
           </div>
 
-          {[
-            { q: '¿Qué marcas de desaladores atienden?', a: 'Somos centro de servicio autorizado para Spectra Watermakers, Sea Recovery, Schenker, Village Marine, Parker, HRO, Katadyn, Idronautica, Pentair, Cruise RO, FilmTec, Cat Pumps, General Pump, March Pumps y WEG. Si tu marca no está en la lista, llámanos — casi siempre podemos ayudar.' },
-            { q: '¿Atienden fuera de La Paz?', a: 'Sí. Hacemos salidas a Marina de La Paz, Marina Palmira, Puerto Escondido y proyectos en todo Baja California Sur. Para ubicaciones lejanas coordinamos logística por WhatsApp.' },
-            { q: '¿Cuánto tarda un servicio típico?', a: 'Diagnóstico el mismo día. Reparaciones menores 1–2 días. Overhauls completos 3–5 días, dependiendo de la disponibilidad de refacciones. Te damos tiempo estimado después del diagnóstico inicial.' },
-            { q: '¿Tienen refacciones en stock?', a: 'Tenemos el mayor inventario de refacciones para desaladores en BCS: membranas, bombas, filtros, válvulas, sellos y más. Lo que no tenemos lo conseguimos — trabajamos directamente con los fabricantes.' },
-            { q: '¿Cuánto cuesta reemplazar una membrana?', a: 'El costo depende del modelo y tamaño de tu watermaker. Escríbenos por WhatsApp con la marca y modelo de tu equipo (o una foto de la placa) y te damos cotización exacta el mismo día.' },
-            { q: '¿Dan servicio a sistemas industriales y residenciales?', a: 'Sí. Instalamos y damos mantenimiento a plantas de ósmosis inversa para hoteles, desarrollos residenciales, ranchos y empresas en toda BCS, además del servicio marino a embarcaciones.' },
-            { q: 'Do you speak English?', a: 'Yes, we speak English fluently. Welcome to all cruisers and international clients — we have served boats from the US, Canada, and Europe for over 15 years.' }
-          ].map((item, i) => (
+          {copy.faq.items.map((item, i) => (
             <details key={i} className="faq-item">
               <summary>{item.q}</summary>
               <div className="faq-answer">{item.a}</div>
@@ -1039,8 +1273,6 @@ function App() {
       </section>
 
       {/* ── FOOTER ─────────────────────────────── */}
-      <ContactSection accent={ac} />
-
       <footer style={{ padding: '48px 20px 36px', background: "rgb(10, 74, 110)", color: "rgb(255, 255, 255)" }}>
         <div className="section-inner">
           <div className="footer-grid">
@@ -1055,10 +1287,10 @@ function App() {
                 style={{ height: 52, width: 'auto', marginBottom: 20, display: 'block' }} />
               
               <p style={{ fontSize: 13, color: '#fff', marginBottom: 20, marginTop: 0, lineHeight: 1.6 }}>
-                "Trust in every drop" — El único centro de servicio autorizado para las principales marcas de desaladores en Baja California Sur.
+                {copy.footer.blurb}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <a href="https://maps.google.com/?q=Mariano+Abasolo+2865+La+Paz+BCS" target="_blank" rel="noopener noreferrer" className="focus-ring"
+                <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer" className="focus-ring"
                 style={{ display: 'flex', alignItems: 'flex-start', gap: 8, color: '#fff', textDecoration: 'none', fontSize: 13, lineHeight: 1.5 }}>
                   <span style={{ marginTop: 1 }}><Icon name="mapPin" size={15} /></span>
                   Mariano Abasolo #2865, col. 5 de Febrero<br />23060 La Paz, B.C.S., México
@@ -1068,7 +1300,7 @@ function App() {
                   <Icon name="phone" size={15} />+52 (612) 140-0253
                 </a>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#fff' }}>
-                  <Icon name="clock" size={15} />Lun–Sáb · 9:00 – 18:00 h
+                  <Icon name="clock" size={15} />{copy.location.hours}
                 </div>
               </div>
             </div>
@@ -1076,9 +1308,9 @@ function App() {
             {/* Col 2: servicios */}
             <div>
               <p style={{ fontSize: 12, fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>
-                Servicios
+                {copy.footer.services}
               </p>
-              {['Marino & Náutico', 'Residencial', 'Industrial', 'Refacciones', 'Instalación', 'Diagnóstico'].map((s) =>
+              {copy.footer.serviceList.map((s) =>
               <p key={s} style={{ fontSize: 13, color: '#fff', margin: '0 0 8px' }}>{s}</p>
               )}
             </div>
@@ -1086,12 +1318,12 @@ function App() {
             {/* Col 3: redes + CTA */}
             <div>
               <p style={{ fontSize: 12, fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>
-                Encuéntranos
+                {copy.footer.find}
               </p>
               {[
               { icon: 'fb', label: 'Facebook', href: 'https://www.facebook.com/TheWaterMakerStore' },
               { icon: 'ig', label: 'Instagram', href: 'https://instagram.com/the_watermaker_guys' },
-              { icon: 'globe', label: 'Sitio web', href: 'https://www.thewatermakerstore.com.mx/' }].
+              { icon: 'globe', label: copy.footer.website, href: 'https://www.thewatermakerstore.com.mx/' }].
               map((l) =>
               <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="focus-ring"
               style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', textDecoration: 'none', fontSize: 13, marginBottom: 12, transition: 'opacity 0.15s' }}
@@ -1102,7 +1334,7 @@ function App() {
                 </a>
               )}
               <p style={{ fontSize: 12, color: '#fff', marginTop: 10 }}>
-                🇺🇸 We speak English
+                {copy.footer.speaks}
               </p>
             </div>
 
@@ -1111,9 +1343,9 @@ function App() {
           {/* Bottom bar */}
           <div className="footer-bottom" style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.15)' }}>
             <p style={{ fontSize: 11, color: '#fff', margin: 0 }}>
-              © {new Date().getFullYear()} The Watermaker Store. Todos los derechos reservados.
+              © {new Date().getFullYear()} The Watermaker Store. {copy.footer.rights}
             </p>
-            <p style={{ fontSize: 11, color: '#fff', margin: 0 }}>La Paz, Baja California Sur, México</p>
+            <p style={{ fontSize: 11, color: '#fff', margin: 0 }}>{copy.footer.place}</p>
           </div>
         </div>
       </footer>
@@ -1138,10 +1370,6 @@ function App() {
             style={{ width: 32, height: 28, border: 'none', cursor: 'pointer', borderRadius: 4, padding: 0 }} />
               <span style={{ fontSize: 12, color: '#6B7280' }}>{tweaks.accentColor}</span>
             </div>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
-            <span style={{ fontSize: 13, color: '#374151' }}>Mostrar blog</span>
-            <input type="checkbox" checked={tweaks.showBlog} onChange={(e) => setTweak('showBlog', e.target.checked)} />
           </label>
         </div>
       }

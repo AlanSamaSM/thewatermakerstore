@@ -51,8 +51,18 @@ Do not use the repository root (`.`) as the output directory. During Cloudflare 
 ## 4. Local test
 
 1. Copy `.dev.vars.example` to `.dev.vars`.
-2. Fill in real values.
-3. Run:
+2. Fill in real Resend/email values.
+3. Keep the Turnstile test keys for local development:
+
+```txt
+TURNSTILE_SITE_KEY=1x00000000000000000000AA
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+```
+
+These Cloudflare test keys always pass and work on `localhost` and `127.0.0.1`.
+Do not mix a test site key with a production secret key, or a production site key with the test secret key.
+
+4. Run:
 
 ```bash
 bun run preview
@@ -76,3 +86,4 @@ This starts a local Cloudflare Pages environment with the `functions/` folder ac
 - The public Turnstile site key endpoint is in `functions/api/contact-config.js`.
 - Resend requires `CONTACT_FROM_EMAIL` to use a verified sender/domain.
 - If the form says it is not configured, one or more environment variables are missing.
+- For production, use the real Turnstile site key and secret key from your Cloudflare widget. For local development, use the test pair shown above.
